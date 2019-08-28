@@ -19,11 +19,12 @@ public class RandomList<T> {
 
     public static void main(String[] args) {
         RandomList<String> rs=new RandomList<>();
-        for(String s:("The quick brown fox jumpwd over "+"the lazy brown dog").split(" ")){
+        for(String s:("The quick brown fox jumpwd over the lazy brown dog").split(" ")){
             rs.add(s);
         }
         for (int i=0;i<11;i++){
-            System.out.println(rs.select()+" ");
+            System.out.println(rs.select());
         }
     }
+
 }
