@@ -28,20 +28,3 @@ public class SimpleFactory {
 }
 
 
-class Milk implements Food{
-     private String name;
-    @Override
-    public void show() {
-        System.out.println("这是牛奶");
-    }
-
-}
-class Bread implements Food{
-    private String name;
-    @Override
-    public void show() {
-        System.out.println("这是面包");
-    }
-
-}
-
