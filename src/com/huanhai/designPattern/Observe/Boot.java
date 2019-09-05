@@ -14,5 +14,6 @@ public class Boot {
         t.add(s1);
         t.add(s2);
         t.notifyObserver();
+        System.out.println(null == null);
     }
 }
