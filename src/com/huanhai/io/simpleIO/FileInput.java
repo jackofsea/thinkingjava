@@ -10,12 +10,15 @@ import java.io.*;
  */
 public class FileInput {
   public static void readFile(String path) {
+      InputStream in=null;
+      InputStreamReader fr=null;
+      BufferedReader bt=null;
       try{
           //获取文件输入流
-          InputStream in =new FileInputStream(path);
+           in =new FileInputStream(path);
           //缓冲流
-          InputStreamReader fr =new InputStreamReader(in);
-          BufferedReader bt=new BufferedReader(fr);
+           fr =new InputStreamReader(in);
+           bt=new BufferedReader(fr);
           String ctx=null;
           while ((ctx =bt.readLine())!= null){
               System.out.println(ctx);
@@ -23,6 +26,13 @@ public class FileInput {
       }catch (Exception e){
           e.printStackTrace();
       }finally {
+          try {
+              bt.close();
+              fr.close();
+              in.close();
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
 
       }
 
