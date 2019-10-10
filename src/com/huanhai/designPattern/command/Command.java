@@ -6,5 +6,13 @@ package com.huanhai.designPattern.command;
  *
  */
 public interface Command {
-    void exe();
+    /**
+     * 执行方法
+     */
+    void execute();
+
+    /**
+     * 撤销
+     */
+    void undo();
 }
