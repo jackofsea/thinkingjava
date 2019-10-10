@@ -1,4 +1,4 @@
-package com.huanhai.designPattern.command;
+package com.huanhai.designpattern.command;
 
 /**
  * 抽象命令

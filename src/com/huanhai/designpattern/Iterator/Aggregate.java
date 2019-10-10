@@ -1,4 +1,4 @@
-package com.huanhai.designPattern.Iterator;
+package com.huanhai.designpattern.Iterator;
 
 public interface Aggregate {
     void add(Object obj);

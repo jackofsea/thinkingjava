@@ -1,4 +1,4 @@
-package com.huanhai.io.simpleIO;
+package com.huanhai.designpattern.proxy;
 
 /**
  * @version 1.0
@@ -6,8 +6,9 @@ package com.huanhai.io.simpleIO;
  * @Author: 覃波
  * @Date: 2019/9/16
  */
-public class Boot {
+public class ProxyBoot {
     public static void main(String[] args) {
-        FileInput.readFile("D:\\a.txt");
+        Proxy p=new Proxy();
+        p.order();
     }
 }

@@ -1,4 +1,4 @@
-package com.huanhai.Connectionstraning;
+package com.huanhai.connectionstraning;
 
 import java.util.ArrayList;
 import java.util.Random;

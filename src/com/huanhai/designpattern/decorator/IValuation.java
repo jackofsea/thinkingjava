@@ -1,4 +1,4 @@
-package com.huanhai.designPattern.decorator;
+package com.huanhai.designpattern.decorator;
 
 public interface IValuation {
     /**

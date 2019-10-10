@@ -1,4 +1,4 @@
-package com.huanhai.designPattern.state;
+package com.huanhai.designpattern.state;
 
 /**
  * @Description 抽象状态类

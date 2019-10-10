@@ -1,4 +1,4 @@
-package com.huanhai.Connectionstraning;
+package com.huanhai.connectionstraning;
 
 /**
  * @Description 利用内部类，泛型实现栈结构

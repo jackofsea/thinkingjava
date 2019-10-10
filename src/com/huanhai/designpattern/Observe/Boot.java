@@ -1,4 +1,4 @@
-package com.huanhai.designPattern.Observe;
+package com.huanhai.designpattern.Observe;
 
 /**
  * @version 1.0

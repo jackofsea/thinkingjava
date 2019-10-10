@@ -1,4 +1,4 @@
-package com.huanhai.io.simpleIO;
+package com.huanhai.io.simpleio;
 
 import java.io.*;
 
