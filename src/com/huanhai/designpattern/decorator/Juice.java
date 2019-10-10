@@ -1,4 +1,4 @@
-package com.huanhai.designPattern.decorator;
+package com.huanhai.designpattern.decorator;
 
 /**
  * @version 1.0
@@ -7,8 +7,12 @@ package com.huanhai.designPattern.decorator;
  * @Date: 2019/9/5
  */
 public class Juice implements IValuation {
+    private IValuation  condiment;
+    public Juice(IValuation  condiment){
+        this.condiment=condiment;
+    }
     @Override
     public float cost() {
-        return 1.1f;
+        return 1.1f+condiment.cost();
     }
 }

@@ -11,6 +11,7 @@ public class RemoteControl {
     private Command playCommand;
     private Command rewindCommand;
     private Command stopCommand;
+    private Command undoCommand;
 
     public void setPlayCommand(Command playCommand) {
         this.playCommand = playCommand;
@@ -26,17 +27,26 @@ public class RemoteControl {
      */
     public void play(){
         playCommand.execute();
+        undoCommand=playCommand;
     }
     /**
      * 执行倒带方法
      */
     public void rewind(){
         rewindCommand.execute();
+        undoCommand=playCommand;
     }
     /**
      * 执行播放方法
      */
     public void stop(){
         stopCommand.execute();
+        undoCommand=playCommand;
+    }
+    /**
+     * 撤销
+     */
+    public void upd0(){
+        undoCommand.undo();
     }
 }

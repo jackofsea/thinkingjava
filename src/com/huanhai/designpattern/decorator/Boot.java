@@ -1,4 +1,4 @@
-package com.huanhai.designPattern.decorator;
+package com.huanhai.designpattern.decorator;
 
 /**
  * @version 1.0
@@ -8,11 +8,11 @@ package com.huanhai.designPattern.decorator;
  */
 public class Boot {
     public static void main(String[] args) {
-        IValuation juice=new Juice();
-        IValuation milk=new Milk();
-        IValuation coffee=new Coffee(juice);
-        IValuation coffee2=new Coffee(coffee);
-        System.out.println(coffee.cost());
-        System.out.println(coffee2.cost());
+        IValuation coffee=new Coffee();
+        IValuation juice=new Juice(coffee);
+        IValuation milk=new Milk(juice);
+
+        System.out.println("果汁味 "+juice.cost());
+        System.out.println("果汁味 牛奶味 "+milk.cost());
     }
 }

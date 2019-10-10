@@ -21,6 +21,7 @@ public class CommandBoot {
         keypad.setStopCommand(stopCommand);
         //测试
         keypad.play();
+        keypad.upd0();
         keypad.rewind();
         keypad.stop();
         keypad.play();
