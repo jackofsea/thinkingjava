@@ -8,20 +8,20 @@ package com.huanhai.designpattern.state;
  **/
 public class ScoreContext {
     private AbstractState state;
-    ScoreContext()
-    {
-        state=new LowState(this);
+
+    ScoreContext() {
+        state = new LowState(this);
     }
-    public void setState(AbstractState state)
-    {
-        this.state=state;
+
+    public void setState(AbstractState state) {
+        this.state = state;
     }
-    public AbstractState getState()
-    {
+
+    public AbstractState getState() {
         return state;
     }
-    public void add(int score)
-    {
+
+    public void add(int score) {
         state.addScore(score);
     }
 }

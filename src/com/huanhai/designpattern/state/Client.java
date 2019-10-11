@@ -6,7 +6,7 @@ package com.huanhai.designpattern.state;
  * @Date 2019/9/22 22:19
  * @Version 1.0
  **/
-public class SateBoot {
+public class Client {
     public static void main(String[] args) {
         ScoreContext account=new ScoreContext();
         System.out.println("学生成绩状态测试：");

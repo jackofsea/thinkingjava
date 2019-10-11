@@ -7,9 +7,12 @@ package com.huanhai.designpattern.state;
  * @Version 1.0
  **/
 public abstract class AbstractState {
-    protected ScoreContext hj;  //环境
-    protected String stateName; //状态名
-    protected int score; //分数
+    //环境
+    protected ScoreContext hj;
+    //状态名
+    protected String stateName;
+    //分数
+    protected int score;
     public abstract void checkState(); //检查当前状态
     public void addScore(int x)
     {
