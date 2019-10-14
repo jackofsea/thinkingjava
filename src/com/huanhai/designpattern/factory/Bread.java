@@ -2,7 +2,7 @@ package com.huanhai.designpattern.factory;
 
 /**
  * @version 1.0
- * @Description: TO DO
+ * @Description: 面包类
  * @Author: 覃波
  * @Date: 2019/8/28
  */

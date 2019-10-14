@@ -2,11 +2,11 @@ package com.huanhai.designpattern.builder;
 
 /**
  * @version 1.0
- * @Description: TO DO
+ * @Description: 客户端
  * @Author: 覃波
  * @Date: 2019/10/11
  */
-public class Boot {
+public class Client {
     public static void main(String[] args) {
 
         Builder builder = new WelcomeBuilder();

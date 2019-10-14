@@ -6,7 +6,7 @@ package com.huanhai.designpattern.decorator;
  * @Author: 覃波
  * @Date: 2019/9/5
  */
-public class Boot {
+public class Client {
     public static void main(String[] args) {
         IValuation coffee=new Coffee();
         IValuation juice=new Juice(coffee);

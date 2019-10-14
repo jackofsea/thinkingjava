@@ -7,7 +7,9 @@ package com.huanhai.designpattern.Mediator;
  * @Date: 2019/10/14
  */
 public abstract class Colleague {
-    //持有一个调停者对象
+    /**
+     *  调停者
+     */
     private Mediator mediator;
     /**
      * 构造函数
