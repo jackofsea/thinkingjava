@@ -25,7 +25,7 @@ public class FileInput {
         try {
             //获取文件输入流
             in = new FileInputStream(path);
-            //缓冲流
+            //字符缓冲流
             fr = new InputStreamReader(in);
             bt = new BufferedReader(fr);
             String ctx = null;
