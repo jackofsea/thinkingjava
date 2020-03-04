@@ -1,6 +1,4 @@
-package com.huanhai.thread.nopool;
-
-import java.util.concurrent.TimeUnit;
+package com.huanhai.thread.nopool.t001;
 
 public class Client {
     public static void main(String[] args) {

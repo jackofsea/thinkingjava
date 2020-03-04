@@ -1,4 +1,4 @@
-package com.huanhai.thread.nopool;
+package com.huanhai.thread.nopool.t001;
 
 public class AddThread implements Runnable {
     private Cash cash;
