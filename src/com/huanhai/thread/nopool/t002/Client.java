@@ -37,6 +37,7 @@ class BallRunnable implements Runnable {
                 component.repaint();
                 Thread.sleep(DELAY);
             }
+            System.out.println(ball.getX() + " "+ball.getY());
         } catch (InterruptedException e) {
 
         }
@@ -50,6 +51,14 @@ class Ball {
     private double dy = 1;
     private final static int XSIZE = 15;
     private final static int YSIZE = 15;
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
 
     public void move(Rectangle2D bounds) {
         y += dy;
