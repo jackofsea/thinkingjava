@@ -92,7 +92,7 @@ class BallPanel extends JPanel {
     public void add(Ball ball) {
         balls.add(ball);
     }
-
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
