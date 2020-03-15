@@ -2,7 +2,6 @@ package com.huanhai.thread.nopool.practise;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @Description ToDo
@@ -18,9 +17,9 @@ public class CaveTest {
         for (int i = 0; i <10 ; i++) {
             persions[i]=new Persion("张"+(i+1));
         }
-       AtomicInteger atomicInteger=new AtomicInteger(1);
+        Index index=new Index();
         for (int i = 0; i <persions.length ; i++) {
-            PersionAndCave persionAndCave=new PersionAndCave(persions[i],c,atomicInteger);
+            PersionAndCave persionAndCave=new PersionAndCave(persions[i],c,index);
             new Thread(new ThroughCave(persionAndCave,countDownLatch)).start();
         }
         countDownLatch.countDown();
@@ -46,13 +45,22 @@ class Persion {
 
 class Cave {
 }
+class Index{
+    private int index;
+
+    public Integer getIndex() {
+        return index;
+    }
+    public Integer indexIncre() {
+        return ++index;
+    }
+}
 
 class PersionAndCave {
     private Persion persion;
     private Cave cave;
-    private AtomicInteger index;
-
-    public PersionAndCave(Persion persion, Cave cave,AtomicInteger index) {
+    private Index index;
+    public PersionAndCave(Persion persion, Cave cave,Index index) {
         this.persion = persion;
         this.cave = cave;
         this.index=index;
@@ -64,13 +72,16 @@ class PersionAndCave {
         this.persion = persion;
     }
 
-    public  void throughCave() {
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    public void throughCave() {
+        synchronized (cave){
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(persion.getName() + "第" + index.indexIncre() + "个通过山洞");
         }
-        System.out.println(persion.getName() + "第" + index.getAndIncrement() + "个通过山洞");
+
     }
 
 }
