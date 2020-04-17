@@ -21,8 +21,10 @@ public class IntegerTest {
         System.out.println(Integer.hashCode(34343));
         //highestOneBit,取最高比特位和最低比特位
         System.out.println(Integer.highestOneBit(5) + " "+Integer.lowestOneBit(5));
+        System.out.println(Integer.bitCount(5));
         //比较大小，底层采用的math函数做比较
-        System.out.println(Integer.max(12,16)+"  "+Integer.min(12,16));
+        System.out.println(Integer.max(12,16)+" math比较  "+Integer.min(12,16));
+        System.out.println(new Integer(44).compareTo(22));
         //numberOfLeadingZeros(int i)暂时不懂有什么用
         System.out.println(Integer.numberOfLeadingZeros(2)+" "+ Integer.numberOfTrailingZeros(22));
         //字符串转换为Integer,默认是10进制,可选八进制，十六进制
@@ -32,8 +34,31 @@ public class IntegerTest {
         System.out.println(Integer.remainderUnsigned(555,6));
         //bit序和字节序的颠倒
         System.out.println(Integer.reverse(2)+" "+Integer.reverseBytes(2));
-
         System.out.println(Integer.toBinaryString(33554432).length());
+        //暂时不知
+        System.out.println(Integer.rotateLeft(2,2));
+        System.out.println(Integer.rotateRight(2,2));
+        //signum
+        System.out.println(Integer.signum(11));
+        //sum求和
+        System.out.println(Integer.sum(11,11));
+        //转换为各种进制的字符串
+        System.out.println(Integer.toBinaryString(22));
+        System.out.println(Integer.toHexString(22));
+        System.out.println(Integer.toOctalString(22));
+        System.out.println(Integer.toString(22,8));
+        System.out.println(Integer.toUnsignedString(3434344)+" " + Integer.toUnsignedString(3434344,8));
+        //valueOf方法,会使用缓存
+        System.out.println(Integer.valueOf("323")+"  "+ Integer.valueOf("052",8));
+        //实例方法，返回bytes，long,short,int,float,double
+        System.out.println(new Integer(12).byteValue());
+        System.out.println(new Integer(12).intValue());
+        System.out.println(new Integer(12).longValue());
+        System.out.println(new Integer(12).doubleValue());
+        System.out.println(new Integer(12).floatValue());
+
+
+
 
 
 
