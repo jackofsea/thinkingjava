@@ -56,6 +56,10 @@ public class IntegerTest {
         System.out.println(new Integer(12).longValue());
         System.out.println(new Integer(12).doubleValue());
         System.out.println(new Integer(12).floatValue());
+        //考虑以下错误,Null转换Integer会报NullPointException
+        Integer s=5;
+        Integer s1=null;
+        System.out.println(s1+s);
 
 
 
