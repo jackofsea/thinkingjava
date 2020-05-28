@@ -9,6 +9,7 @@ package com.huanhai.test;
 public class InitTest {
     public static void main(String[] args) {
 
+
     }
 
 }
