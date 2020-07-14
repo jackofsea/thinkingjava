@@ -36,10 +36,13 @@ public class LongTest {
         Long radix8=Long.valueOf("234",8);
         Long radix2=Long.valueOf("1011",2);
         System.out.println("radix8:"+radix8+" "+"radix2:"+radix2);
-        //字符串转换为Long,不带参数默认按10进制转换
-        Long radix2p=Long.parseLong("1111",2);
-        Long radix10=Long.parseLong("11123");
+        //按指定进制解析将字符串转换为Long,不带参数默认按10进制转换
+        long radix2p=Long.parseLong("044",8);
+        long radix10=Long.parseLong("11123");
         System.out.println("radix2p:"+radix2p+" "+"radix10:"+radix10);
+        //转换无符号的字符串
+        System.out.println(Long.parseUnsignedLong("222"));
+        System.out.println(Long.parseUnsignedLong("455555555555555555555555",8));
     }
 
     //Long转换为字符串
@@ -54,9 +57,10 @@ public class LongTest {
         System.out.println(new Long(34222219));
         //转换为无符号字符串
         System.out.println(Long.toUnsignedString(-3));
+        System.out.println(Long.toUnsignedString(22,8));
     }
 
-    //Long的一些运算
+    //Long的一些运算,不推荐使用
     public static void operation() {
        //比较大小，底层用的Math类
         System.out.println(Long.max(2323,4444));
@@ -69,7 +73,27 @@ public class LongTest {
     public static void bitOperation() {
         //signum,取得数值的符号函数，-1是负数，0是0,1是整数
         System.out.println(Long.signum(-32323));
-
+        //bit位，取最高位bit的1表示的值
+        System.out.println(Long.highestOneBit(-9223372036854775808L));
+        System.out.println(Long.toBinaryString(-9223372036854775808L));
+        //bit位，取最低位bit的1表示的值
+        System.out.println(Long.lowestOneBit(-22));
+        System.out.println(Long.toBinaryString(-22));
+        //返回最左为1的bit为之前的0的数目
+        System.out.println(Long.numberOfLeadingZeros(2));
+        //返回最右为1的bit为之前的0的数目
+        System.out.println(Long.numberOfTrailingZeros(2));
+        //按bit位翻转
+        System.out.println(Long.reverse(3));
+        System.out.println(Long.toBinaryString(Long.reverse(3)));
+        //按字节翻转
+        System.out.println(Long.reverseBytes(3));
+        System.out.println(Long.toBinaryString(Long.reverseBytes(3)));
+        //循环左移N位或右移N位
+        System.out.println(Long.rotateLeft(3,63));
+        System.out.println(Long.toBinaryString(Long.rotateLeft(3,63)));
+        System.out.println(Long.rotateRight(3,1));
+        System.out.println(Long.toBinaryString(Long.rotateRight(3,1)));
 
     }
 
