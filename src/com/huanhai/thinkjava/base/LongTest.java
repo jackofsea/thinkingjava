@@ -16,6 +16,19 @@ public class LongTest {
         operation();
         //long的一些bit操作
         bitOperation();
+        System.out.println(Long.toBinaryString(Long.MIN_VALUE));
+        byte b=(byte) 0x80;
+        System.out.println(b);
+        System.out.println(Long.toBinaryString(b));
+        //byte类型进行位移，二进制转为int范围，最后截取，确保准确要使用&0xff进行数值截取，如下
+        byte s=-1;
+        System.out.println(Long.toBinaryString(s));
+        //错误做法：s>>>1
+        byte b2= (byte) (((s&0xff)>>>1));
+        System.out.println(b2);
+        System.out.println(Long.toBinaryString(b2));
+
+
     }
 
     //Long对象的静态创建
@@ -42,7 +55,9 @@ public class LongTest {
         System.out.println("radix2p:"+radix2p+" "+"radix10:"+radix10);
         //转换无符号的字符串
         System.out.println(Long.parseUnsignedLong("222"));
-        System.out.println(Long.parseUnsignedLong("455555555555555555555555",8));
+        System.out.println(Long.parseUnsignedLong("255",10));
+        //返回余数
+        System.out.println(Long.remainderUnsigned(10,7));
     }
 
     //Long转换为字符串
