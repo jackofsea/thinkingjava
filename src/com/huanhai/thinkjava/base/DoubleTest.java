@@ -19,7 +19,7 @@ public class DoubleTest {
         //位操作
         bitOperation();
 
-        System.out.println(3.4433<3.4434);
+        System.out.println(Double.toString(3.33112111111232323));
 
 
     }

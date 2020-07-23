@@ -25,8 +25,8 @@ Cookie被禁用、如何实现session
 	了解nginx和apache服务器的特性并搭建一个对应的服务器
 	用Java实现FTP、SMTP协议
 	进程间通讯的方式
-	什么事CDN？如何实现？
-	什么事DNS？
+	什么是CDN？如何实现？
+	什么是DNS？
 	反向代理
 ##	框架知识
 	Servletz中filter和listener
