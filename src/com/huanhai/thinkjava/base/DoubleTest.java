@@ -45,7 +45,7 @@ public class DoubleTest {
 
     }
 
-    //运算,不推荐
+    //比较运算,不推荐
     private static void operation() {
 
         System.out.println(Double.max(2.334, 45554));

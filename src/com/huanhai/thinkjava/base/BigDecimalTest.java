@@ -13,13 +13,17 @@ import java.math.MathContext;
 public class BigDecimalTest {
     public static void main(String[] args) {
         valueOf();
+
         operation();
+
+        logicArithmetic();
     }
 
     //BigDecimal的创建
     private static void valueOf() {
         //不推荐这种创建,浮点数在创建会有精度丢失
         BigDecimal b = BigDecimal.valueOf(3.44444343434f);
+
         BigDecimal b2 = BigDecimal.valueOf(23232);
         System.out.println("b=" + b + "  b2=" + b2);
         //将Long转换为小数
@@ -30,7 +34,7 @@ public class BigDecimalTest {
 
     }
 
-    //运算，构造BigDecimal，要使用String构造，使用double有精度损失
+    //数学运算，构造BigDecimal，要使用String构造，使用double有精度损失
     private static void operation() {
         BigDecimal num1 = new BigDecimal(0.005);
         BigDecimal num2 = new BigDecimal(1000000);
@@ -53,44 +57,62 @@ public class BigDecimalTest {
         BigDecimal result4 = num3.abs();
         BigDecimal result42 = num32.abs();
         //除法
-        BigDecimal result5 = num2.divide(num1,20,BigDecimal.ROUND_HALF_UP);
-        BigDecimal result52 = num22.divide(num12,20,BigDecimal.ROUND_HALF_UP);
+        BigDecimal result5 = num2.divide(num1, 20, BigDecimal.ROUND_HALF_UP);
+        BigDecimal result52 = num22.divide(num12, 20, BigDecimal.ROUND_HALF_UP);
 
-        System.out.println("加法用value结果："+result1);
-        System.out.println("加法用string结果："+result12);
+        System.out.println("加法用value结果：" + result1);
+        System.out.println("加法用string结果：" + result12);
 
-        System.out.println("减法value结果："+result2);
-        System.out.println("减法用string结果："+result22);
+        System.out.println("减法value结果：" + result2);
+        System.out.println("减法用string结果：" + result22);
 
-        System.out.println("乘法用value结果："+result3);
-        System.out.println("乘法用string结果："+result32);
+        System.out.println("乘法用value结果：" + result3);
+        System.out.println("乘法用string结果：" + result32);
 
-        System.out.println("绝对值用value结果："+result4);
-        System.out.println("绝对值用string结果："+result42);
+        System.out.println("绝对值用value结果：" + result4);
+        System.out.println("绝对值用string结果：" + result42);
 
-        System.out.println("除法用value结果："+result5);
-        System.out.println("除法用string结果："+result52);
+        System.out.println("除法用value结果：" + result5);
+        System.out.println("除法用string结果：" + result52);
         //使用MathContext控制精度，在MathContext.UNLIMITED下会抛出ArithmeticException，因为结果是个无限循环小数
-        BigDecimal m1=new BigDecimal("232.344444");
-        BigDecimal m2=new BigDecimal("10.1");
-        System.out.println("DECIMAL32下 m1/m2= "+m1.divide(m2, MathContext.DECIMAL32));
-        System.out.println("DECIMAL64下 m1/m2= "+m1.divide(m2, MathContext.DECIMAL64));
-        System.out.println("DECIMAL128下 m1/m2= "+m1.divide(m2, MathContext.DECIMAL128));
-        System.out.println("DECIMAL32下 m1-m2= "+m1.subtract(m2, MathContext.DECIMAL32));
-        System.out.println("DECIMAL64下 m1-m2= "+m1.subtract(m2, MathContext.DECIMAL64));
-        System.out.println("DECIMAL128下 m-+m2= "+m1.subtract(m2, MathContext.DECIMAL128));
-        System.out.println("DECIMAL32下 m1+m2= "+m1.add(m2, MathContext.DECIMAL32));
-        System.out.println("DECIMAL64下 m1+m2= "+m1.add(m2, MathContext.DECIMAL64));
-        System.out.println("DECIMAL128下 m1+m2= "+m1.add(m2, MathContext.DECIMAL128));
-        System.out.println("DECIMAL32下 m1*m2= "+m1.multiply(m2, MathContext.DECIMAL32));
-        System.out.println("DECIMAL64下 m1*m2= "+m1.multiply(m2, MathContext.DECIMAL64));
-        System.out.println("DECIMAL128下 m1*m2= "+m1.multiply(m2, MathContext.DECIMAL128));
-        System.out.println("不使用bigdecimal,除法："+(232.344444D/10.1D));
-        System.out.println("不使用bigdecimal,加法："+(232.344444D+10.1D));
-        System.out.println("不使用bigdecimal,除法："+(232.344444D*10.1D));
-        System.out.println("不使用bigdecimal,减法："+(232.344444D-10.1D));
+        BigDecimal m1 = new BigDecimal("232.344454");
+        BigDecimal m2 = new BigDecimal("10.1");
+        System.out.println("DECIMAL32下 m1/m2= " + m1.divide(m2, MathContext.DECIMAL32));
+        System.out.println("DECIMAL64下 m1/m2= " + m1.divide(m2, MathContext.DECIMAL64));
+        System.out.println("DECIMAL128下 m1/m2= " + m1.divide(m2, MathContext.DECIMAL128));
+        System.out.println("DECIMAL32下 m1-m2= " + m1.subtract(m2, MathContext.DECIMAL32));
+        System.out.println("DECIMAL64下 m1-m2= " + m1.subtract(m2, MathContext.DECIMAL64));
+        System.out.println("DECIMAL128下 m-+m2= " + m1.subtract(m2, MathContext.DECIMAL128));
+        System.out.println("DECIMAL32下 m1+m2= " + m1.add(m2, MathContext.DECIMAL32));
+        System.out.println("DECIMAL64下 m1+m2= " + m1.add(m2, MathContext.DECIMAL64));
+        System.out.println("DECIMAL128下 m1+m2= " + m1.add(m2, MathContext.DECIMAL128));
+        System.out.println("DECIMAL32下 m1*m2= " + m1.multiply(m2, MathContext.DECIMAL32));
+        System.out.println("DECIMAL64下 m1*m2= " + m1.multiply(m2, MathContext.DECIMAL64));
+        System.out.println("DECIMAL128下 m1*m2= " + m1.multiply(m2, MathContext.DECIMAL128));
+        System.out.println("不使用bigdecimal,除法：" + (232.344444D / 10.1D));
+        System.out.println("不使用bigdecimal,加法：" + (232.344444D + 10.1D));
+        System.out.println("不使用bigdecimal,除法：" + (232.344444D * 10.1D));
+        System.out.println("不使用bigdecimal,减法：" + (232.344444D - 10.1D));
+        //幂运算
+        System.out.println("幂运算："+m1.pow(6));
+        System.out.println("带DECIMAL32的幂运算："+m1.pow(6,MathContext.DECIMAL32));
+        System.out.println("10的幂运算this*10^n："+m1.scaleByPowerOfTen(2));
+        System.out.println("round取近似值："+m1.round(MathContext.DECIMAL32));
+        System.out.println("取余数："+m1.remainder(m2));
+    }
 
-
+    //逻辑运算
+    private static void logicArithmetic() {
+        BigDecimal m1 = new BigDecimal("4.5344321");
+        BigDecimal m2 = new BigDecimal("4.2");
+        System.out.println("max:"+m1.max(m2));
+        System.out.println("min:"+m1.min(m2));
+        System.out.println("abs:"+m1.abs());
+        System.out.println("返回相反数-X："+m1.negate());
+        System.out.println("返回相反数+X："+m1.plus());
+        System.out.println("取整数部分："+m1.toBigInteger());
+        System.out.println("使用Engineering转化为String："+m1.toEngineeringString());
+        System.out.println("使用Engineering转化为String："+m1.toPlainString());
 
 
     }
