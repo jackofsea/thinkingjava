@@ -4,6 +4,8 @@ import sun.nio.cs.ext.GBK;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * String的熟悉
@@ -52,6 +54,15 @@ public class StringTest {
         System.out.println("字节数组转化utf_16BE:" + new String(utf_16BE, StandardCharsets.UTF_16BE));
         System.out.println("字节数组转化utf_16LE:" + new String(utf_16LE, StandardCharsets.UTF_16LE));
         System.out.println("字节数组转化ISO_8859_1:" + new String(iso_8859_1, StandardCharsets.ISO_8859_1));
+        //获得子串
+        System.out.println("获得子串substring："+"你是收到后前往3332".substring(2));
+        System.out.println("获得子串substring："+"你是收到后前往3332".substring(2,4));
+        //转换大小写，,带Locale参数的为国际化
+        System.out.println("转换大写upCase:"+"农四师dfDFeef ".toUpperCase());
+        System.out.println("转换大写lowCase:"+"农四师dfDFeef ".toLowerCase());
+        System.out.println("转换大写lowCase国际化:"+"农四师dfDFeef ".toLowerCase(Locale.FRENCH));
+        //去掉前后空格
+        System.out.println("去掉前后空格trim:"+"农四师dfDF eef ".trim());
     }
 
     //其他操作
@@ -64,6 +75,7 @@ public class StringTest {
         System.out.println("以'你是1'结束endWith：" + exam.endsWith("你是1"));
         //只比较String
         System.out.println("判断是否相等equals："+exam.equals("ini1"));
+        System.out.println("忽略大小写判断是否相等equals："+exam.equalsIgnoreCase("你是1212SDEFEF "));
         StringBuilder sd=new StringBuilder();
         sd.append(121);
         //比较字符序列CharSequence是否相等,范围比equals范围大
@@ -78,7 +90,14 @@ public class StringTest {
         System.out.println("码位(Unicode code point)转换后的16进制字符串：\\u" + Integer.toUnsignedString(exam.codePointAt(1), 16));
         System.out.println("获得指定位置前一位的码位(Unicode code point)codePointAt(1):" + exam.codePointBefore(2));
         //String的正则匹配，一位数字的正则表达式是 \\d，而表示一个普通的反斜杠是 \\\\。
-        System.out.println("正则匹配matches： "+exam.matches("^\\S+$"));
+        exam = "你是1212Sdefef ";
+        System.out.println("正则匹配matches： "+exam.matches("[\\u4e00-\\u9fa5]"));
+        //字符串替换,还可以使用正则
+        System.out.println("字符才替换replace："+exam.replace("你","你才是"));
+        System.out.println("字符才替换replaceAll："+exam.replaceAll("e","测试"));
+        //字符串格式化输出,带Locale参数的为国际化
+        System.out.println(String.format("日志输出：%s,时间是：%s","开始打印",new Date()));
+        System.out.println(String.format(Locale.FRENCH,"日志输出：%s,时间是：%s","开始打印",new Date()));
 
 
     }
