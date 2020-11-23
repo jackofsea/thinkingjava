@@ -11,20 +11,29 @@ import java.util.List;
  * @date 2020/8/2 13:19
  **/
 public class ThreadLocalTest {
+    private static  ThreadLocal<String> namaStr=new ThreadLocal<>();
     public static void main(String[] args) throws InterruptedException {
          ThreadLocal<Integer> threadLocal=new ThreadLocal<>();
          //设置对象
          threadLocal.set(5);
-         //取得对象
-        System.out.println(threadLocal.get());
+        namaStr.set("你是");
         //移除key和value,可以防止内存泄露
-        threadLocal.remove();
-//        Numbers m=new Numbers();
-//        for (int i=1;i<6;i++){
-//            TestOrder t=new TestOrder(m);
-//            t.start();
-//        }
+//        threadLocal.remove();
+        int HASH_INCREMENT = 0x61c88647;
+       for (int i=1;i<5;i++){
+           System.out.println("循环"+i);
+           int finalI = i;
+           Thread t=new Thread(()->{
+             threadLocal.set(finalI +1);
+               System.out.println(namaStr.get());
+         });
+           t.start();
 
+       }
+    Thread.sleep(100);
+        System.out.println(namaStr.get());
+        //取得对象
+        System.out.println(threadLocal.get());
 
 
     }

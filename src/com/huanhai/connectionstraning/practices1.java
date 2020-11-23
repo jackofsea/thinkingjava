@@ -15,7 +15,7 @@ public class practices1 {
         holder4.set(new Animal("动物1"),0);
         holder4.set(new Tiger("动物1","嗷嗷啊"),1);
         holder4.set(new Animal("动物3"),2);
-        System.out.println(holder4.get(2));
+        System.out.println(holder4.get(1));
     }
 }
 class Holder3<T>{

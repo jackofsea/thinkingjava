@@ -18,12 +18,12 @@ public class TradeThreadPool {
      */
     private ThreadPoolExecutor pool;
     /**
-     * 线程池数量
+     * 线程池数量,和CPU核心数有关
      */
-    private int threadSize=50;
+    private int threadSize=17;
 
     TradeThreadPool(){
-        pool=new ThreadPoolExecutor(10,threadSize,0, TimeUnit.MILLISECONDS,new LinkedBlockingQueue<>(),new TradeThradFactory());
+        pool=new ThreadPoolExecutor(17,threadSize,0, TimeUnit.MILLISECONDS,new LinkedBlockingQueue<>(),new TradeThradFactory());
     }
 
 

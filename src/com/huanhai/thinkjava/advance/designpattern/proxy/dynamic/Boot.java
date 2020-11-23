@@ -10,6 +10,7 @@ import java.lang.reflect.Proxy;
  */
 public class Boot {
     public static void main(String[] args) {
+        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles","true");
         People chinese = new Chinese();
         PeopleInvocationHandler invocationHandler = new PeopleInvocationHandler(chinese);
         People proxy = (People) Proxy.newProxyInstance(chinese.getClass().getClassLoader(), chinese.getClass().getInterfaces(), invocationHandler);
