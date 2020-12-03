@@ -10,18 +10,45 @@ import java.util.Random;
  * @Version 1.0
  **/
 public class InitTest {
-    public static void main(String[] args) {
-       int j=0;
-       while (j<100){
-           String s=getRandomJianHan(3);
-           System.out.println("重庆"+s+"科技有限公司");
-           j++;
-       }
 
+    public static void main(String[] args) {
+        String str1=new StringBuilder("计算机").append("软件").toString();
+        //String str1="计算机"+"软件";
+        String str5=new String("计算机软件");
+       // System.out.println(str1.intern() == str5.intern());
+        System.out.println(str1.intern() == str1);
+//        String s4="计算机软件";
+//        System.out.println(str1.intern()==s4);
+//       System.out.println(str5==s4);
+//        System.out.println(str1==str5);
+//        String str2=new StringBuilder("java").append("va").toString();
+//        System.out.println(str2.intern()==str2);
+
+     double d=2.33D;
+        System.out.println(d<=0);
+
+
+//        Vector<Dog> v= new Vector<>();
+//        v.add(new Dog("放到"));
+//        v.addElement(new Dog("放到2"));
+//       Integer a=1;
+//       Integer b=2;
+//       Integer c=3;
+//       Integer d=3;
+//       Integer e=321;
+//        Integer f=321;
+//        Long g=3L;
+//        System.out.println(c==d);
+//        System.out.println(e==f);
+//        System.out.println(c==(a+b));
+//        System.out.println(c.equals(a+b));
+//        System.out.println(g==(a+b));
+//        System.out.println(g.equals(a+b));
 
 
 
     }
+
 
     public static String getRandomJianHan(int len)
     {
@@ -48,4 +75,16 @@ public class InitTest {
         return sb.toString();
     }
 
+}
+
+class Dog{
+    private String name;
+    public Dog(String name){
+        name=this.name;
+    }
+
+    @Override
+    public String toString() {
+        return "Dog{" +super.toString();
+    }
 }
