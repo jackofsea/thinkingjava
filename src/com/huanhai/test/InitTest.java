@@ -24,8 +24,7 @@ public class InitTest {
 //        String str2=new StringBuilder("java").append("va").toString();
 //        System.out.println(str2.intern()==str2);
 
-     double d=2.33D;
-        System.out.println(d<=0);
+        System.out.println(0.2123+0.23111);
 
 
 //        Vector<Dog> v= new Vector<>();
