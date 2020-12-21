@@ -40,15 +40,16 @@ public class Price implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("线程准备运行。。"+Thread.currentThread().getName());
+        System.out.println("线程准备++++++"+Thread.currentThread().getName());
         while (stop){
-            System.out.println("线程运行中。。"+Thread.currentThread().getName());
+            System.out.println("线程运行....."+Thread.currentThread().getName());
             try {
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.MILLISECONDS.sleep(10);
             }catch (Exception e){
 
             }
 
         }
+        System.out.println("线程结束-----"+Thread.currentThread().getName());
     }
 }
