@@ -5,7 +5,7 @@
 
 解答：
  堆：线程共享，可动态扩展的内存区域，在JVM中，堆还被分为年轻代（eden）和年老代，但内存分配超过Xmx时，会发生OOM；
- 栈：线程私有，为每个方法创建栈诊，存储局部变量表、操作栈、动态链接、方法出口等信息，当线程调用深度过大会抛出StackOverflowError,
+ 栈：线程私有，为每个方法创建栈帧，存储局部变量表、操作栈、动态链接、方法出口等信息，当线程调用深度过大会抛出StackOverflowError,
  JVM在扩展栈无法申请到足够内存会发OOM；
  方法区：存储被JVM加载的class信息、常量、静态变量、JIT编译后的代码等数据，也称永久代；
  直接内存：NIO、Native函数直接分配的堆外内存、DirectBuffer会引用这部分内存。
@@ -24,56 +24,69 @@
  和处理器都必须遵守as-if-serial语义。
  多线程遵守happens-before原则:在JMM中，如果一个操作执行的结果需要对另一个操作可见，那么这两个操作之间必须存在happens-before关系。
  1. 如果一个操作happens-before另一个操作，那么第一个操作的执行结果将对第二个操作可见，而且第一个操作的执行顺序排在第二个操作之前。
- 
+
  2. 两个操作之间存在happens-before关系，并不意味着一定要按照happens-before原则制定的顺序来执行。如果重排序之后的执行结果与按照
  happens-before关系来执行的结果一致，那么这种重排序并不非法。
- 
+
  下面是happens-before原则规则：
- 
+
  程序次序规则：一个线程内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作；
  锁定规则：一个unLock操作先行发生于后面对同一个锁额lock操作；
  volatile变量规则：对一个变量的写操作先行发生于后面对这个变量的读操作；
  传递规则：如果操作A先行发生于操作B，而操作B又先行发生于操作C，则可以得出操作A先行发生于操作C；
  线程启动规则：Thread对象的start()方法先行发生于此线程的每个一个动作；
  线程中断规则：对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生；
- 线程终结规则：线程中所有的操作都先行发生于线程的终止检测，我们可以通过Thread.join()方法结束、Thread.isAlive()的返回值手段检测到线程已经终止执行；
+ 线程join规则：线程中所有的操作都先行发生于线程的终止检测，我们可以通过Thread.join()方法结束、Thread.isAlive()的返回值手段检测到线程已经终止执行；
  对象终结规则：一个对象的初始化完成先行发生于他的finalize()方法的开始；
  我们来详细看看上面每条规则（摘自《深入理解Java虚拟机第12章》）：
- 
+
  程序次序规则：一段代码在单线程中执行的结果是有序的。注意是执行结果，因为虚拟机、处理器会对指令进行重排序（重排序后面会详细介绍）。虽然重排序了，但是并不会影响程序的执行结果，所以程序最终执行的结果与顺序执行的结果是一致的。故而这个规则只对单线程有效，在多线程环境下无法保证正确性。
- 
+
  锁定规则：这个规则比较好理解，无论是在单线程环境还是多线程环境，一个锁处于被锁定状态，那么必须先执行unlock操作后面才能进行lock操作。
- 
+
  volatile变量规则：这是一条比较重要的规则，它标志着volatile保证了线程可见性。通俗点讲就是如果一个线程先去写一个volatile变量，然后一个线程去读这个变量，那么这个写操作一定是happens-before读操作的。
- 
+
  传递规则：提现了happens-before原则具有传递性，即A happens-before B , B happens-before C，那么A happens-before C
- 
+
  线程启动规则：假定线程A在执行过程中，通过执行ThreadB.start()来启动线程B，那么线程A对共享变量的修改在接下来线程B开始执行后确保对线程B可见。
- 
- 线程终结规则：假定线程A在执行的过程中，通过制定ThreadB.join()等待线程B终止，那么线程B在终止之前对共享变量的修改在线程A等待返回后可见。
- 
+
+ 线程join规则：假定线程A在执行的过程中，通过制定ThreadB.join()等待线程B终止，那么线程B在终止之前对共享变量的修改在线程A等待返回后可见。
+
  上面八条是原生Java满足Happens-before关系的规则，但是我们可以对他们进行推导出其他满足happens-before的规则：
- 
- 将一个元素放入一个线程安全的队列的操作Happens-Before从队列中取出这个元素的操作
- 将一个元素放入一个线程安全容器的操作Happens-Before从容器中取出这个元素的操作
- 在CountDownLatch上的倒数操作Happens-Before CountDownLatch#await()操作
- 释放Semaphore许可的操作Happens-Before获得许可操作
- Future表示的任务的所有操作Happens-Before Future#get()操作
- 向Executor提交一个Runnable或Callable的操作Happens-Before任务开始执行操作
- 这里再说一遍happens-before的概念：如果两个操作不存在上述（前面8条 + 后面6条）任一一个happens-before规则，那么这两个操作就没有
+
+​    将一个元素放入一个线程安全的队列的操作Happens-Before从队列中取出这个元素的操作
+​    将一个元素放入一个线程安全容器的操作Happens-Before从容器中取出这个元素的操作
+   在CountDownLatch上的倒数操作Happens-Before CountDownLatch#await()操作
+   释放Semaphore许可的操作Happens-Before获得许可操作
+   Future表示的任务的所有操作Happens-Before Future#get()操作
+   向Executor提交一个Runnable或Callable的操作Happens-Before任务开始执行操作
+   这里再说一遍happens-before的概念：如果两个操作不存在上述（前面8条 + 后面6条）任一一个happens-before规则，那么这两个操作就没有
  顺序的保障，JVM可以对这两个操作进行重排序。如果操作A happens-before操作B，那么操作A在内存上所做的操作对操作B都是可见的。
- 
-*	垃圾回收
-内存分配策略、垃圾收集器（G1）、GC算法、GC参数、对象存活的判定
-*	JVM参数及调优
-*	Java对象模型
-oop-klass、对象头
-*	HotSpot
-即时编译器、编译优化
-*	类加载机制
-classLoader、类加载过程、双亲委派（破坏双亲委派）、模块化（jboss modules、osgi、jigsaw）
-*	虚拟机性能监控与故障处理工具
-jps,jstack、jmap、jstat,jconsole,jinfo,jhat,javap,btrace、TProfiler
+
+* 垃圾回收
+  &ensp;内存分配策略、垃圾收集器（G1）、GC算法、GC参数、对象存活的判定
+
+  内存分配策略：指针碰撞和空闲列表方式。解决分配冲突的有两只方式：CAS和TLAB。
+
+  GC算法：标记清除、复制算法、标记整理。
+
+  对象存活判断：引用计数法和可达性分析算法。
+
+  GC参数：
+
+* JVM参数及调优
+
+* Java对象模型
+  oop-klass、对象头
+
+* HotSpot
+  即时编译器、编译优化
+
+* 类加载机制
+  classLoader、类加载过程、双亲委派（破坏双亲委派）、模块化（jboss modules、osgi、jigsaw）
+
+* 虚拟机性能监控与故障处理工具
+  jps,jstack、jmap、jstat,jconsole,jinfo,jhat,javap,btrace、TProfiler
 ##	编译与反编译
 Javac、Javap、Jad、CRF
 ##	Java基础知识

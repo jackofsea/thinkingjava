@@ -2,6 +2,7 @@ package com.huanhai.thinkjava.base;
 
 /**
  * 枚举可以拥有抽象方法和成员变量
+ * 因为语法糖的原因，拥有抽象方法和成员变量的枚举成员会自动编译成内部类
  */
 public enum School {
     LIBERAL{
