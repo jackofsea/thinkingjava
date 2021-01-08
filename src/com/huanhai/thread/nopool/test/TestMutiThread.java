@@ -7,6 +7,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
+ * 不能使用可变引用对象加锁，如Integer,Long等等
+ *
  * @author 覃波
  * @version 1.0
  * @date 2020-12-14 11:33
