@@ -49,15 +49,12 @@ public class PriceRunnable implements Runnable {
     @Override
     public void run() {
         System.out.println("线程准备++++++"+Thread.currentThread().getName());
-        Map<String,Integer> m=new HashMap();
-        //synchronized(PriceBoot.p){
+        Map<String,Integer> m=new HashMap<>();
+
             while (stop){
-                // System.out.println("线程运行....."+Thread.currentThread().getName());
                 m.put("1",2);
 
             }
-       // }
-
 
         System.out.println("线程结束-----"+Thread.currentThread().getName());
     }
