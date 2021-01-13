@@ -31,9 +31,14 @@ package com.huanhai.algorithm.tree;
  **/
 public class BinaryTree {
     public static void main(String[] args) {
-        int[] treeList = new int[]{1, 2, 2, -1, 9, 35, 7};
-        TreeNode tree = createBinaryTree(treeList, 3);
-        System.out.println(tree);
+        int[] treeList = new int[]{1, 8, 2, -1, 9, 35, 7, -1, -1, 11, -1, 3, -1, -1, -1};
+        TreeNode tree = createBinaryTree(treeList, 4);
+        System.out.println("前序遍历---------------------");
+        prelook(tree);
+        System.out.println("\n中序遍历---------------------");
+        midlook(tree);
+        System.out.println("\n后序遍历---------------------");
+        postlook(tree);
     }
 
     /**
@@ -53,30 +58,71 @@ public class BinaryTree {
         int offer;
         for (int i = 2; i <= deep; i++) {
             offer = (int) Math.pow(2, i - 1) - 1;
-            if ((int) Math.pow(2, i) - 1 <= treeList.length) {
-                for (int j = offer; j < (offer + (int) Math.pow(2, i - 1)); j++) {
-                    TreeNode prent = tree[(j - 1) / 2];
-                    if (treeList[j] != -1) {
-                        TreeNode node = new TreeNode(treeList[j]);
-                        tree[j] = node;
-                        if (j % 2 == 0) {
-                            prent.setRight(node);
-                        } else {
-                            prent.setLeft(node);
-                        }
-                    } else {
-                        if (j % 2 == 0) {
-                            prent.setRight(null);
-                        } else {
-                            prent.setLeft(null);
-                        }
-                    }
+            for (int j = offer; j < (offer + (int) Math.pow(2, i - 1)); j++) {
+                TreeNode prent = tree[(j - 1) / 2];
+                TreeNode node = null;
+                if (treeList[j] != -1) {
+                    node = new TreeNode(treeList[j]);
+                    tree[j] = node;
+
+                }
+                if (prent == null) {
+                    continue;
+                }
+                if (j % 2 == 0) {
+                    prent.setRight(node);
+                } else {
+                    prent.setLeft(node);
                 }
             }
         }
         return root;
     }
 
+    /**
+     * 前序遍历，递归方式
+     */
+    public static void prelook(TreeNode tree){
+        System.out.print(" "+tree.value);
+         if(tree.getLeft() != null){
+             prelook(tree.getLeft());
+         }
+         if (tree.getRight() != null){
+             prelook(tree.getRight());
+         }
+
+    }
+
+    /**
+     * 中序遍历，递归方式
+     */
+    public static void midlook(TreeNode tree){
+
+        if(tree.getLeft() != null){
+            midlook(tree.getLeft());
+        }
+        System.out.print(" "+tree.value);
+        if (tree.getRight() != null){
+            midlook(tree.getRight());
+        }
+
+    }
+
+    /**
+     * 后序遍历，递归方式
+     */
+    public static void postlook(TreeNode tree){
+
+        if(tree.getLeft() != null){
+            postlook(tree.getLeft());
+        }
+
+        if (tree.getRight() != null){
+            postlook(tree.getRight());
+        }
+        System.out.print(" "+tree.value);
+
+    }
     /**
      * 树节点
      */
