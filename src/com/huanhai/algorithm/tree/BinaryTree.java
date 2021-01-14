@@ -1,5 +1,8 @@
 package com.huanhai.algorithm.tree;
 
+import java.util.LinkedList;
+import java.util.Stack;
+
 /**
  * 二叉树
  * <p>
@@ -39,6 +42,12 @@ public class BinaryTree {
         midlook(tree);
         System.out.println("\n后序遍历---------------------");
         postlook(tree);
+        System.out.println("\n层序遍历---------------------");
+        levelOrder(tree);
+        System.out.println("\n前序非递归遍历---------------------");
+        preOrderLoop( tree);
+        System.out.println("\n中序序非递归遍历---------------------");
+        inOrderLoop(tree);
     }
 
     /**
@@ -82,27 +91,33 @@ public class BinaryTree {
     /**
      * 前序遍历，递归方式
      */
-    public static void prelook(TreeNode tree){
-        System.out.print(" "+tree.value);
-         if(tree.getLeft() != null){
-             prelook(tree.getLeft());
-         }
-         if (tree.getRight() != null){
-             prelook(tree.getRight());
-         }
+    public static void prelook(TreeNode tree) {
+        if (tree == null) {
+            return;
+        }
+        System.out.print(" " + tree.value);
+        if (tree.getLeft() != null) {
+            prelook(tree.getLeft());
+        }
+        if (tree.getRight() != null) {
+            prelook(tree.getRight());
+        }
 
     }
 
     /**
      * 中序遍历，递归方式
      */
-    public static void midlook(TreeNode tree){
+    public static void midlook(TreeNode tree) {
+        if (tree == null) {
+            return;
+        }
 
-        if(tree.getLeft() != null){
+        if (tree.getLeft() != null) {
             midlook(tree.getLeft());
         }
-        System.out.print(" "+tree.value);
-        if (tree.getRight() != null){
+        System.out.print(" " + tree.value);
+        if (tree.getRight() != null) {
             midlook(tree.getRight());
         }
 
@@ -111,18 +126,93 @@ public class BinaryTree {
     /**
      * 后序遍历，递归方式
      */
-    public static void postlook(TreeNode tree){
+    public static void postlook(TreeNode tree) {
+        if (tree == null) {
+            return;
+        }
 
-        if(tree.getLeft() != null){
+        if (tree.getLeft() != null) {
             postlook(tree.getLeft());
         }
 
-        if (tree.getRight() != null){
+        if (tree.getRight() != null) {
             postlook(tree.getRight());
         }
-        System.out.print(" "+tree.value);
+        System.out.print(" " + tree.value);
 
     }
+
+    /**
+     * 层序遍历，也称广度优先遍历
+     * 利用队列进行遍历
+     *
+     * @param root 根节点
+     */
+    public static void levelOrder(TreeNode root) {
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            root = queue.pop();
+            System.out.print(root.value + " ");
+            if (root.getLeft() != null) queue.add(root.getLeft());
+            if (root.getRight() != null) queue.add(root.getRight());
+        }
+    }
+
+    /**
+     * 前序遍历（非递归方式）
+     */
+    public static void preOrderLoop(TreeNode tree) {
+        if (tree == null) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode node = tree;
+
+        while (node != null || !stack.isEmpty()) {
+            //迭代左孩子
+            while (node != null) {
+                System.out.print(node.getValue() + " ");
+                stack.push(node);
+                node = node.getLeft();
+            }
+            //出栈，压入右节点
+            if (!stack.isEmpty()) {
+                node = stack.pop();
+                node = node.getRight();
+            }
+
+        }
+    }
+
+    /**
+     * 中序遍历（非递归方式）
+     */
+    public static void inOrderLoop(TreeNode tree) {
+        if (tree == null) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode node = tree;
+
+        while (node != null || !stack.isEmpty()) {
+            //迭代左孩子
+            while (node != null) {
+                stack.push(node);
+                node = node.getLeft();
+            }
+            //出栈，压入右节点
+            if (!stack.isEmpty()) {
+                node = stack.pop();
+                System.out.print(node.getValue() + " ");
+                node = node.getRight();
+            }
+
+        }
+    }
+
+
+
     /**
      * 树节点
      */

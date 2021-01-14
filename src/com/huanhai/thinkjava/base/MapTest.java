@@ -9,7 +9,8 @@ import java.util.Random;
  * 1.HashMap
  *   1)HashMap是键值对的集合，具体结构是数组+链表（1.8是单链表/红黑树，1.7是单链表）;
  *   2)Map<String,String> m=new HashMap<>()这种形式创建对象，后面的“<>”没有类型是由于JDK1.8的类型推导作用;
- *   3)可能卡在java.util.HashMap$TreeNode.balanceInsertion(HashMap.java:2229)造成假的死循环,可能Node节点转换为TreeNode结点异常;
+ *   3)多线程put数据，可能卡在java.util.HashMap$TreeNode.balanceInsertion(HashMap.java:2229)造成假的死循环,
+ *    也可能出现Node节点转换为TreeNode结点异常，数据发生覆盖;
  *
  * @author 覃波
  * @version 1.0
