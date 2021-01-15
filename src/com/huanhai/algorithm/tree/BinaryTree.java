@@ -211,7 +211,13 @@ public class BinaryTree {
         }
     }
 
+    /**
+     * 后序非递归遍历
+     * @param tree
+     */
+    public static void postOrderLoop(TreeNode tree) {
 
+    }
 
     /**
      * 树节点
