@@ -17,16 +17,49 @@ package com.huanhai.algorithm.tree;
 public class BinarySortTree {
     public static void main(String[] args) {
         int[] val = new int[]{55, 23, 3, 23, 43, 45, 67, 23, 67};
-
+        TreeNode binarySortTree = createBinarySortTree(val);
+        System.out.println(binarySortTree);
     }
 
-    TreeNode createBinarySortTree(int[] val) {
+    /**
+     * 递归形式构建二叉搜索树
+     *
+     * @param val 节点数组
+     * @return 二叉搜索树
+     */
+   public static TreeNode createBinarySortTree(int[] val) {
         if (val == null || val.length < 1) {
             return null;
         }
         TreeNode root = new TreeNode(val[0], null, null);
-        return null;
+        for (int i=1;i<val.length;i++){
+            insertNode(root,new TreeNode(val[i], null, null));
+        }
+        return root;
 
+    }
+
+    /**
+     * 插入树节点
+     *
+     * @param root 根节点
+     * @param node 新节点
+     */
+    public static void insertNode(TreeNode root,TreeNode node){
+       if(root.getValue() > node.getValue()){
+           if(root.getLeft() != null){
+               insertNode(root.getLeft(),node);
+           }else {
+               root.setLeft(node);
+           }
+
+       }else {
+           if(root.getRight() != null){
+               insertNode(root.getRight(),node);
+           }else {
+               root.setRight(node);
+           }
+       }
     }
 
 
@@ -35,13 +68,13 @@ public class BinarySortTree {
      */
     static class TreeNode implements Comparable<TreeNode> {
         int value;
-        BinaryTree.TreeNode left;
-        BinaryTree.TreeNode right;
+        TreeNode left;
+        TreeNode right;
 
         public TreeNode() {
         }
 
-        public TreeNode(int value, BinaryTree.TreeNode left, BinaryTree.TreeNode right) {
+        public TreeNode(int value, TreeNode left, TreeNode right) {
             this.value = value;
             this.left = left;
             this.right = right;
@@ -59,19 +92,19 @@ public class BinarySortTree {
             this.value = value;
         }
 
-        public BinaryTree.TreeNode getLeft() {
+        public TreeNode getLeft() {
             return left;
         }
 
-        public void setLeft(BinaryTree.TreeNode left) {
+        public void setLeft(TreeNode left) {
             this.left = left;
         }
 
-        public BinaryTree.TreeNode getRight() {
+        public TreeNode getRight() {
             return right;
         }
 
-        public void setRight(BinaryTree.TreeNode right) {
+        public void setRight(TreeNode right) {
             this.right = right;
         }
 
