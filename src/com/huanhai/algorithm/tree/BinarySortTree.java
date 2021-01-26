@@ -33,33 +33,43 @@ public class BinarySortTree {
         }
         TreeNode root = new TreeNode(val[0], null, null);
         for (int i=1;i<val.length;i++){
-            insertNode(root,new TreeNode(val[i], null, null));
+            addNode(root,new TreeNode(val[i], null, null));
         }
         return root;
 
     }
 
     /**
-     * 插入树节点
+     * 添加树节点
      *
      * @param root 根节点
      * @param node 新节点
      */
-    public static void insertNode(TreeNode root,TreeNode node){
+    public static void addNode(TreeNode root,TreeNode node){
        if(root.getValue() > node.getValue()){
            if(root.getLeft() != null){
-               insertNode(root.getLeft(),node);
+               addNode(root.getLeft(),node);
            }else {
                root.setLeft(node);
            }
 
        }else {
            if(root.getRight() != null){
-               insertNode(root.getRight(),node);
+               addNode(root.getRight(),node);
            }else {
                root.setRight(node);
            }
        }
+    }
+
+    /**
+     *  删除节点
+     *
+     * @param root
+     * @param node
+     */
+    public static void removeNode(TreeNode root,int node){
+
     }
 
 
