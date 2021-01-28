@@ -4,11 +4,9 @@ package com.huanhai.algorithm.tree;
  * 二叉查找树（二叉排序树）
  *
  * 二叉排序树又称二叉排序树。它或者是一个空树，或者是一个具有下列性质的二叉树：
- *  1)若它的左子树不空，则左子树上所有节点的值均小于它的根结构的值；
- *  2)若它的右子树不空，则右子树上所有结点的值均大于它的根节点的值；
- *  3)它的左、右子树也分别是二叉排序树。
- *
- *
+ * 1)若它的左子树不空，则左子树上所有节点的值均小于它的根结构的值；
+ * 2)若它的右子树不空，则右子树上所有结点的值均大于它的根节点的值；
+ * 3)它的左、右子树也分别是二叉排序树。
  *
  * @author 覃波
  * @version 1.0
@@ -16,7 +14,7 @@ package com.huanhai.algorithm.tree;
  **/
 public class BinarySortTree {
     public static void main(String[] args) {
-        int[] val = new int[]{55, 23, 3, 23, 43, 45, 67, 23, 67};
+        int[] val = new int[]{55, 23, 3, 24, 43, 45, 67, 24, 68};
         TreeNode binarySortTree = createBinarySortTree(val);
         System.out.println(binarySortTree);
     }
@@ -27,48 +25,75 @@ public class BinarySortTree {
      * @param val 节点数组
      * @return 二叉搜索树
      */
-   public static TreeNode createBinarySortTree(int[] val) {
+    public static TreeNode createBinarySortTree(int[] val) {
         if (val == null || val.length < 1) {
             return null;
         }
         TreeNode root = new TreeNode(val[0], null, null);
-        for (int i=1;i<val.length;i++){
-            addNode(root,new TreeNode(val[i], null, null));
+        for (int i = 1; i < val.length; i++) {
+            addNodeByIterator(root, new TreeNode(val[i], null, null));
         }
         return root;
 
     }
 
     /**
-     * 添加树节点
+     * 添加树节点，递归
      *
      * @param root 根节点
      * @param node 新节点
      */
-    public static void addNode(TreeNode root,TreeNode node){
-       if(root.getValue() > node.getValue()){
-           if(root.getLeft() != null){
-               addNode(root.getLeft(),node);
-           }else {
-               root.setLeft(node);
-           }
+    public static void addNode(TreeNode root, TreeNode node) {
+        if (root.getValue() > node.getValue()) {
+            if (root.getLeft() != null) {
+                addNode(root.getLeft(), node);
+            } else {
+                root.setLeft(node);
+            }
 
-       }else {
-           if(root.getRight() != null){
-               addNode(root.getRight(),node);
-           }else {
-               root.setRight(node);
-           }
-       }
+        } else {
+            if (root.getRight() != null) {
+                addNode(root.getRight(), node);
+            } else {
+                root.setRight(node);
+            }
+        }
     }
 
     /**
-     *  删除节点
+     * 添加树节点，迭代
+     *
+     * @param root 根节点
+     * @param node 新节点
+     */
+    public static void addNodeByIterator(TreeNode root, TreeNode node) {
+        while (root != null) {
+
+            if (root.getLeft() != null && root.getValue() > node.getValue()) {
+                root = root.getLeft();
+                continue;
+            } else if (root.getRight() != null && root.getValue() <= node.getValue()) {
+                root = root.getRight();
+                continue;
+            }
+
+           if(root.getValue() > node.getValue()){
+               root.setLeft(node);
+           }else {
+               root.setRight(node);
+           }
+           break;
+        }
+
+    }
+
+    /**
+     * 删除节点
      *
      * @param root
      * @param node
      */
-    public static void removeNode(TreeNode root,int node){
+    public static void removeNode(TreeNode root, int node) {
 
     }
 
