@@ -2,7 +2,7 @@ package com.huanhai.algorithm.tree;
 
 /**
  * 二叉查找树（二叉排序树）
- *
+ * <p>
  * 二叉排序树又称二叉排序树。它或者是一个空树，或者是一个具有下列性质的二叉树：
  * 1)若它的左子树不空，则左子树上所有节点的值均小于它的根结构的值；
  * 2)若它的右子树不空，则右子树上所有结点的值均大于它的根节点的值；
@@ -16,11 +16,11 @@ public class BinarySortTree {
     public static void main(String[] args) {
         int[] val = new int[]{55, 23, 3, 24, 43, 45, 67, 24, 68};
         TreeNode binarySortTree = createBinarySortTree(val);
-        System.out.println(binarySortTree);
+        removeNode(binarySortTree, 68);
     }
 
     /**
-     * 递归形式构建二叉搜索树
+     * 构建二叉搜索树
      *
      * @param val 节点数组
      * @return 二叉搜索树
@@ -68,21 +68,20 @@ public class BinarySortTree {
      */
     public static void addNodeByIterator(TreeNode root, TreeNode node) {
         while (root != null) {
-
-            if (root.getLeft() != null && root.getValue() > node.getValue()) {
-                root = root.getLeft();
-                continue;
-            } else if (root.getRight() != null && root.getValue() <= node.getValue()) {
-                root = root.getRight();
-                continue;
+            if (root.getValue() > node.getValue()) {
+                if (root.getLeft() != null) {
+                    root = root.getLeft();
+                    continue;
+                }
+                root.setLeft(node);
+            } else {
+                if (root.getRight() != null) {
+                    root = root.getRight();
+                    continue;
+                }
+                root.setRight(node);
             }
-
-           if(root.getValue() > node.getValue()){
-               root.setLeft(node);
-           }else {
-               root.setRight(node);
-           }
-           break;
+            break;
         }
 
     }
@@ -94,6 +93,26 @@ public class BinarySortTree {
      * @param node
      */
     public static void removeNode(TreeNode root, int node) {
+        TreeNode perNode = null;
+        while (root != null && root.getValue() != node) {
+            perNode = root;
+            if (  node < root.getValue()) {
+                root = root.left;
+            } else {
+                root = root.right;
+            }
+        }
+        if (root == null) {
+            System.out.println("没有找到对应的节点");
+            return;
+        }
+        if (root.getRight() != null && root.getLeft() != null) {
+            System.out.println("节点有左右节点");
+        } else {
+            assert perNode != null;
+            perNode.setRight(null);
+            perNode.setLeft(null);
+        }
 
     }
 
