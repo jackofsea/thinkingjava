@@ -45,9 +45,28 @@ public class BinaryTree {
         System.out.println("\n层序遍历---------------------");
         levelOrder(tree);
         System.out.println("\n前序非递归遍历---------------------");
-        preOrderLoop( tree);
+        preOrderLoop(tree);
         System.out.println("\n中序序非递归遍历---------------------");
         inOrderLoop(tree);
+
+        String s = "{()(){}{}}({}){}";
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (!stack.isEmpty()) {
+                String tmp = stack.peek().toString() + s.charAt(i);
+                if ("{}".equals(tmp) || "()".equals(tmp) || "[]".equals(tmp)) {
+                    stack.pop();
+                    continue;
+                }
+            }
+            stack.push(s.charAt(i));
+
+        }
+        if (stack.isEmpty()) {
+            System.out.println("括号合法");
+        } else {
+            System.out.println("括号不合法");
+        }
     }
 
     /**
@@ -213,11 +232,13 @@ public class BinaryTree {
 
     /**
      * 后序非递归遍历
+     *
      * @param tree
      */
     public static void postOrderLoop(TreeNode tree) {
 
     }
+
 
     /**
      * 树节点

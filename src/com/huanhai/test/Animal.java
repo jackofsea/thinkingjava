@@ -26,6 +26,7 @@ public class Animal implements IAnimal {
 
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
         Animal animal=new Animal(6);
+        int[] a=new int[10];
         System.out.println(animal.eat());
         animal.weight();
         Class<?> animalClass=Animal.class;
@@ -36,6 +37,7 @@ public class Animal implements IAnimal {
         System.out.println(3*0.2);
         System.out.println(3*0.3);
         System.out.println(0.3);
+        System.out.println(a[1]);
 
     }
 }
