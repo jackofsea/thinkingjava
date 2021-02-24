@@ -31,6 +31,7 @@ public class ListTset {
         singleList.delete(44);
         singleList.add(new SingleList.NodeSimple(0));
         singleList.display();
+        System.out.println(singleList.isEmpty());
 
     }
 
@@ -42,7 +43,7 @@ public class ListTset {
  */
 class SingleList {
     private NodeSimple head;
-    private int size = 1;
+    private int size = 0;
 
     static class NodeSimple {
         private int val;
@@ -153,6 +154,13 @@ class SingleList {
         return null;
     }
 
+    public boolean isEmpty(){
+        return size == 0;
+    }
+
+    /**
+     * 打印链表
+     */
     public void display() {
         System.out.println("\n----------------");
         NodeSimple root = head;
@@ -169,7 +177,7 @@ class SingleList {
  */
 class DoubleList {
     private NodeDoule head;
-    private int size = 1;
+    private int size = 0;
 
     static class NodeDoule {
         private int val;
@@ -187,6 +195,7 @@ class DoubleList {
 
     public void add(NodeDoule node) {
         node.next = head;
+        head.pre=node;
         head = node;
         size++;
     }
