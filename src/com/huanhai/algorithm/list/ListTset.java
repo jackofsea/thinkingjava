@@ -25,12 +25,19 @@ public class ListTset {
         singleList.delete(4);
         singleList.display();
         System.out.println("\n"+singleList.lookUp(12));
+        singleList.addBytail( new SingleList.NodeSimple(99));
+        singleList.addBytail( new SingleList.NodeSimple(11));
+        singleList.display();
+        singleList.delete(44);
+        singleList.add(new SingleList.NodeSimple(0));
+        singleList.display();
+
     }
 
 }
 
 /**
- * 单链表
+ * 单链表，不带头结点
  *
  */
 class SingleList {
@@ -50,6 +57,11 @@ class SingleList {
         }
     }
 
+    /**
+     * 头部插入
+     *
+     * @param node
+     */
     public void add(NodeSimple node) {
         node.next = head;
         head = node;
@@ -57,7 +69,26 @@ class SingleList {
     }
 
     /**
-     * 链表插入
+     *  尾部插入
+     * @param node
+     */
+    public void addBytail(NodeSimple node) {
+        if(head==null){
+            add(node);
+            return;
+        }
+        NodeSimple root = head;
+        NodeSimple pre=null;
+        while (root!= null) {
+            pre = root;
+            root = root.next;
+        }
+        pre.next=node;
+        size++;
+    }
+
+    /**
+     * 链表插入，指定位置
      *
      * @param location
      */
@@ -105,6 +136,12 @@ class SingleList {
         }
     }
 
+    /**
+     * 链表查找
+     *
+     * @param val
+     * @return
+     */
     public NodeSimple lookUp(int val){
         NodeSimple root = head;
         while (root != null) {
