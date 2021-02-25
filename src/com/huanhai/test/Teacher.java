@@ -12,4 +12,7 @@ public abstract class Teacher {
     interface condition{
         void getName();
     }
+    public final void say(){
+        System.out.println("哈喽Teacher");
+    }
 }

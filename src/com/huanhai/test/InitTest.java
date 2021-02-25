@@ -23,25 +23,9 @@ public class InitTest {
 //        System.out.println(str1==str5);
 //        String str2=new StringBuilder("java").append("va").toString();
 //        System.out.println(str2.intern()==str2);
+            new Dog("小三").say();
 
 
-
-//        Vector<Dog> v= new Vector<>();
-//        v.add(new Dog("放到"));
-//        v.addElement(new Dog("放到2"));
-//       Integer a=1;
-//       Integer b=2;
-//       Integer c=3;
-//       Integer d=3;
-//       Integer e=321;
-//        Integer f=321;
-//        Long g=3L;
-//        System.out.println(c==d);
-//        System.out.println(e==f);
-//        System.out.println(c==(a+b));
-//        System.out.println(c.equals(a+b));
-//        System.out.println(g==(a+b));
-//        System.out.println(g.equals(a+b));
 
 
 
@@ -75,7 +59,7 @@ public class InitTest {
 
 }
 
-class Dog{
+class Dog extends Teacher{
     private String name;
     public Dog(String name){
         name=this.name;

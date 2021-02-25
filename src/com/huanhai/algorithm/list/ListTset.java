@@ -9,37 +9,73 @@ package com.huanhai.algorithm.list;
  **/
 public class ListTset {
     public static void main(String[] args) {
+        //单链表测试
+        // testSingleList();
+        //双向链表测试
+        //  testDoubleList();
+        //单向循环链表
+        testSingleCycleList();
+
+
+    }
+
+    public static void testSingleCycleList() {
+        SingleCycleList cycleList = new SingleCycleList();
+        cycleList.add(6);
+        cycleList.add(7);
+        cycleList.add(8);
+        cycleList.add(9);
+    }
+
+    public static void testSingleList() {
+        DoubleList doubleList = new DoubleList();
+        doubleList.add(8);
+        doubleList.add(5);
+        doubleList.add(5);
+        doubleList.add(8);
+        doubleList.add(9);
+        doubleList.addBytail(20);
+        doubleList.display();
+        doubleList.delete(8);
+        doubleList.addBytail(28);
+        doubleList.addBytail(22);
+        doubleList.display();
+        doubleList.insert(0, 6);
+        doubleList.insert(3, 6);
+        doubleList.insert(8, 6);
+        doubleList.display();
+    }
+
+    public static void testDoubleList() {
         SingleList singleList = new SingleList();
-        singleList.add(new SingleList.NodeSimple(2));
-        singleList.add(new SingleList.NodeSimple(4));
-        singleList.add(new SingleList.NodeSimple(7));
-        singleList.add(new SingleList.NodeSimple(9));
+        singleList.add(2);
+        singleList.add(4);
+        singleList.add(7);
+        singleList.add(9);
         singleList.delete(7);
         singleList.display();
-        singleList.insert(1, new SingleList.NodeSimple(12));
+        singleList.insert(1, 12);
         singleList.display();
-        singleList.insert(3, new SingleList.NodeSimple(6));
+        singleList.insert(3, 6);
         singleList.display();
-        singleList.insert(6, new SingleList.NodeSimple(44));
+        singleList.insert(6, 44);
         singleList.display();
         singleList.delete(4);
         singleList.display();
-        System.out.println("\n"+singleList.lookUp(12));
-        singleList.addBytail( new SingleList.NodeSimple(99));
-        singleList.addBytail( new SingleList.NodeSimple(11));
+        System.out.println("\n" + singleList.lookUp(12));
+        singleList.addBytail(99);
+        singleList.addBytail(11);
         singleList.display();
         singleList.delete(44);
-        singleList.add(new SingleList.NodeSimple(0));
+        singleList.add(0);
         singleList.display();
-        System.out.println(singleList.isEmpty());
-
     }
 
 }
 
+
 /**
  * 单链表，不带头结点
- *
  */
 class SingleList {
     private NodeSimple head;
@@ -52,8 +88,9 @@ class SingleList {
         public NodeSimple(int val) {
             this.val = val;
         }
+
         @Override
-        public String toString(){
+        public String toString() {
             return Integer.toString(val);
         }
     }
@@ -61,30 +98,33 @@ class SingleList {
     /**
      * 头部插入
      *
-     * @param node
+     * @param val
      */
-    public void add(NodeSimple node) {
-        node.next = head;
-        head = node;
+    public void add(int val) {
+        NodeSimple nodeSimple = new NodeSimple(val);
+        nodeSimple.next = head;
+        head = nodeSimple;
         size++;
     }
 
     /**
-     *  尾部插入
-     * @param node
+     * 尾部插入
+     *
+     * @param val
      */
-    public void addBytail(NodeSimple node) {
-        if(head==null){
-            add(node);
+    public void addBytail(int val) {
+        if (head == null) {
+            add(val);
             return;
         }
+        NodeSimple nodeSimple = new NodeSimple(val);
         NodeSimple root = head;
-        NodeSimple pre=null;
-        while (root!= null) {
+        NodeSimple pre = null;
+        while (root != null) {
             pre = root;
             root = root.next;
         }
-        pre.next=node;
+        pre.next = nodeSimple;
         size++;
     }
 
@@ -93,20 +133,21 @@ class SingleList {
      *
      * @param location
      */
-    public void insert(int location, NodeSimple node) {
+    public void insert(int location, int val) {
         if (location - 1 < 0 || size <= location - 1) {
             return;
         }
-        if(location == 1){
-            add(node);
+        if (location == 1) {
+            add(val);
             return;
         }
+        NodeSimple nodeSimple = new NodeSimple(val);
         NodeSimple root = head;
-        NodeSimple pre=null;
+        NodeSimple pre = null;
         for (int i = 1; i <= location; i++) {
             if (i == location) {
-                node.next = pre.next;
-                pre.next = node;
+                nodeSimple.next = pre.next;
+                pre.next = nodeSimple;
                 size++;
                 break;
             }
@@ -130,7 +171,6 @@ class SingleList {
             if (tmp.val == val) {
                 pre.next = pre.next.next;
                 size--;
-                break;
             }
             pre = tmp;
             tmp = tmp.next;
@@ -143,7 +183,7 @@ class SingleList {
      * @param val
      * @return
      */
-    public NodeSimple lookUp(int val){
+    public NodeSimple lookUp(int val) {
         NodeSimple root = head;
         while (root != null) {
             if (root.val == val) {
@@ -154,7 +194,7 @@ class SingleList {
         return null;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return size == 0;
     }
 
@@ -162,7 +202,7 @@ class SingleList {
      * 打印链表
      */
     public void display() {
-        System.out.println("\n----------------");
+        System.out.println("\n ------ 单项链表----------");
         NodeSimple root = head;
         while (root != null) {
             System.out.print(" " + root.val);
@@ -171,9 +211,65 @@ class SingleList {
 
     }
 }
+
+/**
+ * 单项循环链表
+ */
+class SingleCycleList {
+    private Node head;
+    private Node tail;
+
+    static class Node {
+        private int val;
+        private Node next;
+
+        public Node(int val) {
+            this.val = val;
+        }
+
+        @Override
+        public String toString() {
+            return Integer.toString(val);
+        }
+    }
+
+    /**
+     * 头部插入
+     *
+     * @param val
+     */
+    public void add(int val) {
+        Node node = new Node(val);
+        Node tmp = head;
+        if (tmp == null) {
+            head = node;
+            tail = node;
+            tail.next=head;
+        } else {
+          node.next=head;
+          tail.next=node;
+          head=node;
+        }
+
+    }
+
+    /**
+     * 打印链表
+     */
+    public void display() {
+        System.out.println("\n ------ 单项链表----------");
+        Node root = head;
+        while (root != null) {
+            System.out.print(" " + root.val);
+            root = root.next;
+        }
+
+    }
+}
+
+
 /**
  * 双向链表
- *
  */
 class DoubleList {
     private NodeDoule head;
@@ -187,48 +283,95 @@ class DoubleList {
         public NodeDoule(int val) {
             this.val = val;
         }
+
         @Override
-        public String toString(){
+        public String toString() {
             return Integer.toString(val);
         }
     }
 
-    public void add(NodeDoule node) {
-        node.next = head;
-        head.pre=node;
+    /**
+     * 添加，头插法
+     *
+     * @param val
+     */
+    public void add(int val) {
+        NodeDoule node = new NodeDoule(val);
+        if (!isEmpty()) {
+            node.next = head;
+            head.pre = node;
+        }
         head = node;
         size++;
     }
 
     /**
-     * 链表插入
+     * 添加，尾插法
+     *
+     * @param val
+     */
+    public void addBytail(int val) {
+        if (isEmpty()) {
+            add(val);
+            return;
+        }
+        NodeDoule node = new NodeDoule(val);
+        NodeDoule nodeDoule = loopUpAt(size);
+        nodeDoule.next = node;
+        node.pre = nodeDoule;
+        size++;
+    }
+
+    /**
+     * 查找指定位置的数据
      *
      * @param location
      */
-    public void insert(int location, NodeDoule node) {
+    public NodeDoule loopUpAt(int location) {
+        if (location - 1 < 0 || size <= location - 1) {
+            return null;
+        }
+        NodeDoule root = head;
+        for (int i = 1; i <= location; i++) {
+            if (i == location) {
+                return root;
+            }
+            root = root.next;
+        }
+        return null;
+    }
+
+
+    /**
+     * 双向链表，插入
+     *
+     * @param location
+     */
+    public void insert(int location, int val) {
         if (location - 1 < 0 || size <= location - 1) {
             return;
         }
-        if(location == 1){
-            add(node);
+        if (location == 1) {
+            add(val);
             return;
         }
+        NodeDoule node = new NodeDoule(val);
         NodeDoule root = head;
-        NodeDoule pre=null;
         for (int i = 1; i <= location; i++) {
             if (i == location) {
-                node.next = pre.next;
-                pre.next = node;
+                node.next = root;
+                node.pre = root.pre;
+                root.pre.next = node;
+                root.pre = node;
                 size++;
                 break;
             }
-            pre = root;
             root = root.next;
         }
     }
 
     /**
-     * 删除节点
+     * 双向链表，删除节点
      *
      * @param val
      */
@@ -237,19 +380,23 @@ class DoubleList {
             return;
         }
         NodeDoule tmp = head;
-        NodeDoule pre = null;
         while (tmp != null) {
             if (tmp.val == val) {
-                pre.next = pre.next.next;
+                tmp.pre.next = tmp.next;
+                tmp.next.pre = tmp.pre;
                 size--;
-                break;
             }
-            pre = tmp;
             tmp = tmp.next;
         }
     }
 
-    public NodeDoule lookUp(int val){
+    /**
+     * 链表查找
+     *
+     * @param val 数据
+     * @return NodeDoule
+     */
+    public NodeDoule lookUp(int val) {
         NodeDoule root = head;
         while (root != null) {
             if (root.val == val) {
@@ -260,8 +407,20 @@ class DoubleList {
         return null;
     }
 
+    /**
+     * 判空
+     *
+     * @return
+     */
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    /**
+     * 链表打印
+     */
     public void display() {
-        System.out.println("\n----------------");
+        System.out.println("\n--------双向链表--------");
         NodeDoule root = head;
         while (root != null) {
             System.out.print(" " + root.val);
@@ -270,3 +429,4 @@ class DoubleList {
 
     }
 }
+
