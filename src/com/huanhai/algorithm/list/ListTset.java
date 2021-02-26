@@ -25,6 +25,9 @@ public class ListTset {
         cycleList.add(7);
         cycleList.add(8);
         cycleList.add(9);
+        cycleList.addForTail(10);
+        cycleList.display();
+        System.out.println(cycleList.lookUp(8));
     }
 
     public static void testSingleList() {
@@ -91,7 +94,7 @@ class SingleList {
 
         @Override
         public String toString() {
-            return Integer.toString(val);
+            return "数据："+Integer.toString(val);
         }
     }
 
@@ -208,6 +211,7 @@ class SingleList {
             System.out.print(" " + root.val);
             root = root.next;
         }
+        System.out.println();
 
     }
 }
@@ -244,25 +248,64 @@ class SingleCycleList {
         if (tmp == null) {
             head = node;
             tail = node;
-            tail.next=head;
+            tail.next = head;
         } else {
-          node.next=head;
-          tail.next=node;
-          head=node;
+            node.next = head;
+            tail.next = node;
+            head = node;
         }
 
+    }
+
+    /**
+     * 尾部插入
+     *
+     * @param val
+     */
+    public void addForTail(int val) {
+        Node node = new Node(val);
+        if (head == null) {
+            add(val);
+            return;
+        }
+        node.next = head;
+        tail.next = node;
+        tail = node;
+    }
+
+    /**
+     * 链表查找
+     *
+     * @param val
+     * @return
+     */
+    public Node lookUp(int val) {
+        Node root = head;
+        Node pre = null;
+        //迭代查找
+        while (root != null && pre != tail) {
+            if (root.val == val) {
+                return root;
+            }
+            pre = root;
+            root = root.next;
+        }
+        return null;
     }
 
     /**
      * 打印链表
      */
     public void display() {
-        System.out.println("\n ------ 单项链表----------");
+        System.out.println("\n ------ 单项循环链表----------");
         Node root = head;
-        while (root != null) {
+        Node pre = null;
+        while (root != null && pre != tail) {
             System.out.print(" " + root.val);
+            pre =root;
             root = root.next;
         }
+        System.out.println();
 
     }
 }
