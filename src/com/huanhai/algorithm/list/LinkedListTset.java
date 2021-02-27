@@ -7,7 +7,7 @@ package com.huanhai.algorithm.list;
  * @version 1.0
  * @date 2021-02-23 11:26
  **/
-public class ListTset {
+public class LinkedListTset {
     public static void main(String[] args) {
         //单链表测试
         // testSingleList();
@@ -20,7 +20,7 @@ public class ListTset {
     }
 
     public static void testSingleCycleList() {
-        SingleCycleList cycleList = new SingleCycleList();
+        SingleLinkedCycleList cycleList = new SingleLinkedCycleList();
         cycleList.add(6);
         cycleList.add(7);
         cycleList.add(8);
@@ -31,47 +31,47 @@ public class ListTset {
     }
 
     public static void testSingleList() {
-        DoubleList doubleList = new DoubleList();
-        doubleList.add(8);
-        doubleList.add(5);
-        doubleList.add(5);
-        doubleList.add(8);
-        doubleList.add(9);
-        doubleList.addBytail(20);
-        doubleList.display();
-        doubleList.delete(8);
-        doubleList.addBytail(28);
-        doubleList.addBytail(22);
-        doubleList.display();
-        doubleList.insert(0, 6);
-        doubleList.insert(3, 6);
-        doubleList.insert(8, 6);
-        doubleList.display();
+        DoubleLinkedList doubleLinkedList = new DoubleLinkedList();
+        doubleLinkedList.add(8);
+        doubleLinkedList.add(5);
+        doubleLinkedList.add(5);
+        doubleLinkedList.add(8);
+        doubleLinkedList.add(9);
+        doubleLinkedList.addBytail(20);
+        doubleLinkedList.display();
+        doubleLinkedList.delete(8);
+        doubleLinkedList.addBytail(28);
+        doubleLinkedList.addBytail(22);
+        doubleLinkedList.display();
+        doubleLinkedList.insert(0, 6);
+        doubleLinkedList.insert(3, 6);
+        doubleLinkedList.insert(8, 6);
+        doubleLinkedList.display();
     }
 
     public static void testDoubleList() {
-        SingleList singleList = new SingleList();
-        singleList.add(2);
-        singleList.add(4);
-        singleList.add(7);
-        singleList.add(9);
-        singleList.delete(7);
-        singleList.display();
-        singleList.insert(1, 12);
-        singleList.display();
-        singleList.insert(3, 6);
-        singleList.display();
-        singleList.insert(6, 44);
-        singleList.display();
-        singleList.delete(4);
-        singleList.display();
-        System.out.println("\n" + singleList.lookUp(12));
-        singleList.addBytail(99);
-        singleList.addBytail(11);
-        singleList.display();
-        singleList.delete(44);
-        singleList.add(0);
-        singleList.display();
+        SingleLinkedList singleLinkedList = new SingleLinkedList();
+        singleLinkedList.add(2);
+        singleLinkedList.add(4);
+        singleLinkedList.add(7);
+        singleLinkedList.add(9);
+        singleLinkedList.delete(7);
+        singleLinkedList.display();
+        singleLinkedList.insert(1, 12);
+        singleLinkedList.display();
+        singleLinkedList.insert(3, 6);
+        singleLinkedList.display();
+        singleLinkedList.insert(6, 44);
+        singleLinkedList.display();
+        singleLinkedList.delete(4);
+        singleLinkedList.display();
+        System.out.println("\n" + singleLinkedList.lookUp(12));
+        singleLinkedList.addBytail(99);
+        singleLinkedList.addBytail(11);
+        singleLinkedList.display();
+        singleLinkedList.delete(44);
+        singleLinkedList.add(0);
+        singleLinkedList.display();
     }
 
 }
@@ -80,7 +80,7 @@ public class ListTset {
 /**
  * 单链表，不带头结点
  */
-class SingleList {
+class SingleLinkedList {
     private NodeSimple head;
     private int size = 0;
 
@@ -219,7 +219,7 @@ class SingleList {
 /**
  * 单项循环链表
  */
-class SingleCycleList {
+class SingleLinkedCycleList {
     private Node head;
     private Node tail;
 
@@ -244,8 +244,7 @@ class SingleCycleList {
      */
     public void add(int val) {
         Node node = new Node(val);
-        Node tmp = head;
-        if (tmp == null) {
+        if (isEmpty()) {
             head = node;
             tail = node;
             tail.next = head;
@@ -264,7 +263,7 @@ class SingleCycleList {
      */
     public void addForTail(int val) {
         Node node = new Node(val);
-        if (head == null) {
+        if (isEmpty()) {
             add(val);
             return;
         }
@@ -294,6 +293,14 @@ class SingleCycleList {
     }
 
     /**
+     * 判空
+     *
+     * @return
+     */
+    public boolean isEmpty() {
+        return head == null;
+    }
+    /**
      * 打印链表
      */
     public void display() {
@@ -314,7 +321,7 @@ class SingleCycleList {
 /**
  * 双向链表
  */
-class DoubleList {
+class DoubleLinkedList {
     private NodeDoule head;
     private int size = 0;
 
