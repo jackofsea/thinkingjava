@@ -1,5 +1,7 @@
 package com.huanhai.algorithm.stack;
 
+import java.util.Queue;
+
 /**
  * 链表实现栈
  *
@@ -23,7 +25,7 @@ public class LinkStack<T> {
     }
 
     public T peek() {
-        return (T) tail.object;
+        return  tail.object;
     }
 
     /**
