@@ -115,12 +115,9 @@ public class BinaryTree {
             return;
         }
         System.out.print(" " + tree.value);
-        if (tree.getLeft() != null) {
-            prelook(tree.getLeft());
-        }
-        if (tree.getRight() != null) {
-            prelook(tree.getRight());
-        }
+        prelook(tree.getLeft());
+
+        prelook(tree.getRight());
 
     }
 
@@ -132,13 +129,13 @@ public class BinaryTree {
             return;
         }
 
-        if (tree.getLeft() != null) {
-            midlook(tree.getLeft());
-        }
+
+        midlook(tree.getLeft());
+
         System.out.print(" " + tree.value);
-        if (tree.getRight() != null) {
-            midlook(tree.getRight());
-        }
+
+        midlook(tree.getRight());
+
 
     }
 
@@ -150,13 +147,9 @@ public class BinaryTree {
             return;
         }
 
-        if (tree.getLeft() != null) {
-            postlook(tree.getLeft());
-        }
 
-        if (tree.getRight() != null) {
-            postlook(tree.getRight());
-        }
+        postlook(tree.getLeft());
+        postlook(tree.getRight());
         System.out.print(" " + tree.value);
 
     }
