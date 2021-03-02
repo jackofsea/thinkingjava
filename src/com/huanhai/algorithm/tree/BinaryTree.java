@@ -34,8 +34,8 @@ import java.util.Stack;
  **/
 public class BinaryTree {
     public static void main(String[] args) {
-        int[] treeList = new int[]{1, 8, 2, -1, 9, 35, 7, -1, -1, 11, -1, 3, -1, -1, -1};
-        TreeNode tree = createBinaryTree(treeList, 4);
+        int[] treeList = new int[]{1,2,3,-1,-1,4,5,-1,-1,2,2,44,33,56,78};
+        TreeNode tree = createBinaryTree(treeList, 3);
         System.out.println("前序遍历---------------------");
         prelook(tree);
         System.out.println("\n中序遍历---------------------");
@@ -48,7 +48,8 @@ public class BinaryTree {
         preOrderLoop(tree);
         System.out.println("\n中序序非递归遍历---------------------");
         inOrderLoop(tree);
-
+        TreeNode tree2=createTreeForDef(treeList,0);
+        System.out.println(tree2);
         String s = "{()(){}{}}({}){}";
         Stack<Character> stack = new Stack<>();
         for (int i = 0; i < s.length(); i++) {
@@ -79,7 +80,9 @@ public class BinaryTree {
         if (treeList == null) {
             return null;
         }
+        //存储临时节点
         TreeNode[] tree = new TreeNode[treeList.length];
+        //二叉树
         TreeNode root = new TreeNode(treeList[0]);
         tree[0] = root;
         //偏移量
@@ -104,6 +107,23 @@ public class BinaryTree {
                 }
             }
         }
+        return root;
+    }
+
+    /**
+     *  递归构造二叉树
+     *
+     * @param arr
+     * @param i
+     * @return
+     */
+    public static TreeNode createTreeForDef(int[] arr, int i){
+        if (i >= arr.length || arr[i] == -1) {
+            return null;
+        }
+        TreeNode root = new TreeNode(arr[i]);
+        root.setLeft(createTreeForDef(arr,2*i+1));
+        root.setRight(createTreeForDef(arr,2*i+2));
         return root;
     }
 
@@ -161,13 +181,20 @@ public class BinaryTree {
      * @param root 根节点
      */
     public static void levelOrder(TreeNode root) {
+        if(root == null){
+            return;
+        }
         LinkedList<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         while (!queue.isEmpty()) {
             root = queue.pop();
             System.out.print(root.value + " ");
-            if (root.getLeft() != null) queue.add(root.getLeft());
-            if (root.getRight() != null) queue.add(root.getRight());
+            if (root.getLeft() != null){
+                queue.add(root.getLeft());
+            }
+            if (root.getRight() != null){
+                queue.add(root.getRight());
+            }
         }
     }
 

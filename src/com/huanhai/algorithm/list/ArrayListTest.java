@@ -3,7 +3,6 @@ package com.huanhai.algorithm.list;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Stack;
 
 /**
  * @author 覃波
