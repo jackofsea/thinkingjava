@@ -2,7 +2,7 @@ package com.huanhai.algorithm.queue;
 
 /**
  * 队列，FIFO先进先出，下面的demo基于数组实现队列
- * @param <E>
+ * @author luofeng
  */
 public class ArrayQueue<E> {
     /**
@@ -76,14 +76,29 @@ public class ArrayQueue<E> {
         return tail == elements.length? null:(E) elements[head];
     }
 
+    /**
+     * 判断队列是否为空
+     *
+     * @return true or false
+     */
     public boolean isEmpty() {
         return head == tail;
     }
 
+    /**
+     * 判断队列是否已满
+     *
+     * @return true or false
+     */
     public boolean isFull() {
         return (tail - head) == elements.length;
     }
 
+    /**
+     * 返回队列元素个数
+     *
+     * @return 元素个数
+     */
     public int size() {
         return size;
     }

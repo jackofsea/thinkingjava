@@ -3,7 +3,7 @@ package com.huanhai.algorithm.stack;
 /**
  * 数组实现栈
  *
- * @author 覃波
+ * @author luofeng
  * @version 1.0
  * @date 2021-02-26 11:48
  **/
@@ -40,6 +40,11 @@ public class ArrayStack<T> {
         return (T) o;
     }
 
+    /**
+     * 判空
+     *
+     * @return true or false
+     */
     public boolean isEmpty() {
         return size == 0;
     }

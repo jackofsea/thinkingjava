@@ -72,7 +72,7 @@ public class BinaryTree {
 
     /**
      * 创建二叉树
-     *
+     * fix
      * @param treeList 节点顺序数组
      * @return 树或者null
      */
