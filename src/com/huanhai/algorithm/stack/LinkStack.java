@@ -1,52 +1,76 @@
 package com.huanhai.algorithm.stack;
 
-import java.util.Queue;
-
 /**
- * 链表实现栈
+ * 栈，基于链表实现
  *
- * @author 覃波
+ * @author luofeng
  * @version 1.0
  * @date 2021-02-26 11:48
  **/
 public class LinkStack<T> {
-    private Node head;
-    private Node tail;
 
+    /**
+     * 栈顶
+     */
+    private Node top;
+
+    /**
+     * 栈元素个数
+     */
+    private int size;
+
+    /**
+     *  入栈
+     * @param o 元素，压入栈顶
+     */
     public void push(T o) {
         Node node = new Node(o);
-        if (head == null) {
-            head = node;
-            tail = node;
-        } else {
-            tail.next = node;
-            tail = node;
-        }
+        node.next=top;
+        top=node;
+        size++;
     }
 
+    /**
+     * 查看栈顶元素
+     *
+     * @return 栈顶元素
+     */
     public T peek() {
-        return  tail.object;
+        return  top == null ? null: top.object;
     }
 
     /**
      * 出栈
      *
-     * @return
+     * @return 栈顶元素，并移除
      */
     public T pop() {
-        if (head == tail) {
-            head = null;
-            tail = null;
+        if(isEmpty()){
+          return null;
         }
-        Node node = tail;
-        Node pre = null;
-        Node tmp = head;
-        while (tmp != tail) {
-            pre = tmp;
-            tmp = tmp.next;
-        }
-        tail = pre;
-        return node.object;
+        //取出栈顶元素
+       T t=top.object;
+       top= top.next;
+       size--;
+       return t;
+    }
+
+    /**
+     * 返回栈元素；
+     *
+     * @return
+     */
+    public int size(){
+        return size;
+    }
+
+    /**
+     * 判断是否为栈空
+     *
+     * @return
+     */
+    public boolean isEmpty(){
+        return top == null;
     }
 
     class Node {
@@ -74,5 +98,12 @@ public class LinkStack<T> {
         linkStack.push("二逼");
         System.out.println(linkStack.pop());
         System.out.println(linkStack.peek());
+        System.out.println(linkStack.pop());
+        System.out.println(linkStack.pop());
+        System.out.println(linkStack.pop());
+        linkStack.push("傻逼221");
+        System.out.println(linkStack.pop());
+        System.out.println(linkStack.peek());
+        System.out.println(linkStack.size());
     }
 }
