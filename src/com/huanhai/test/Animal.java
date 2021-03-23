@@ -8,34 +8,44 @@ import java.lang.reflect.Field;
  * @date 2020/7/7 16:43
  **/
 public class Animal implements IAnimal {
-    private int i=3;
-    public Animal(int s){
-        System.out.println(i);
-        i=s;
-        System.out.println(i);
+
+    private int age = 3;
+
+    private Animal animal;
+
+    public Animal(int s) {
+        System.out.println(age);
+        age = s;
+        System.out.println(age);
 
     }
+
     @Override
-    public String eat(){
+    public String eat() {
         return "动物吃屎";
     }
+
     @Override
     public void weight() {
         System.out.println("20斤");
     }
 
+    public int getAge(){
+        return age;
+    }
+
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
-        Animal animal=new Animal(6);
-        int[] a=new int[10];
+        Animal animal = new Animal(6);
+        int[] a = new int[10];
         System.out.println(animal.eat());
         animal.weight();
-        Class<?> animalClass=Animal.class;
-        Field field =animalClass.getDeclaredField("i");
+        Class<?> animalClass = Animal.class;
+        Field field = animalClass.getDeclaredField("i");
         field.setAccessible(true);
         System.out.println(field.get(animal));
-        System.out.println(4*0.1);
-        System.out.println(3*0.2);
-        System.out.println(3*0.3);
+        System.out.println(4 * 0.1);
+        System.out.println(3 * 0.2);
+        System.out.println(3 * 0.3);
         System.out.println(0.3);
         System.out.println(a[1]);
 
