@@ -8,4 +8,5 @@ package com.huanhai.thinkjava.advance.designpattern.proxy.dynamic;
  */
 public interface People {
      void sayHello();
+    void say();
 }

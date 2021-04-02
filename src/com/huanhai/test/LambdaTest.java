@@ -66,8 +66,9 @@ public class LambdaTest {
         int c=intList.stream().map(num->num+1).reduce(Integer::sum).get();
         System.out.println(c);
         System.out.println(intList.stream().mapToInt(Integer::intValue).sum());
-        System.out.println("最大值" +intList.stream().max(Comparator.comparingInt(Integer::intValue)).get());
-        System.out.println("最小值" +intList.stream().min(Comparator.comparingLong(i->i)).get());
+        System.out.println("最大值=" +intList.stream().max(Comparator.comparingInt(Integer::intValue)).get());
+        System.out.println("最小值=" +intList.stream().min(Comparator.comparingLong(i->i)).get());
+        System.out.println("最小值(并行模式)=" +intList.stream().parallel().max(Integer::compareTo).get());
 
 
     }
