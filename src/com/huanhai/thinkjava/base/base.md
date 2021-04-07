@@ -53,20 +53,23 @@
  线程join规则：假定线程A在执行的过程中，通过制定ThreadB.join()等待线程B终止，那么线程B在终止之前对共享变量的修改在线程A等待返回后可见。
 
  上面八条是原生Java满足Happens-before关系的规则，但是我们可以对他们进行推导出其他满足happens-before的规则：
-
-​    将一个元素放入一个线程安全的队列的操作Happens-Before从队列中取出这个元素的操作
-​    将一个元素放入一个线程安全容器的操作Happens-Before从容器中取出这个元素的操作
+​  将一个元素放入一个线程安全的队列的操作Happens-Before从队列中取出这个元素的操作
+​  将一个元素放入一个线程安全容器的操作Happens-Before从容器中取出这个元素的操作
    在CountDownLatch上的倒数操作Happens-Before CountDownLatch#await()操作
    释放Semaphore许可的操作Happens-Before获得许可操作
    Future表示的任务的所有操作Happens-Before Future#get()操作
    向Executor提交一个Runnable或Callable的操作Happens-Before任务开始执行操作
    这里再说一遍happens-before的概念：如果两个操作不存在上述（前面8条 + 后面6条）任一一个happens-before规则，那么这两个操作就没有
  顺序的保障，JVM可以对这两个操作进行重排序。如果操作A happens-before操作B，那么操作A在内存上所做的操作对操作B都是可见的。
+ 
+volatile：利用缓存一致性协议（如MESI）实现线程间共享变量的可见性。
+
+缓存行：JAVA中，每次读取数据是以缓存行为单位来读取数据，缓存行大小为64byte
 
 * 垃圾回收
-  &ensp;内存分配策略、垃圾收集器（G1）、GC算法、GC参数、对象存活的判定
+  内存分配策略、垃圾收集器（G1）、GC算法、GC参数、对象存活的判定
 
-  内存分配策略：指针碰撞和空闲列表方式。解决分配冲突的有两只方式：CAS和TLAB。
+  内存分配策略：指针碰撞和空闲列表方式。解决分配冲突的有两种方式：CAS和TLAB。
 
   GC算法：标记清除、复制算法、标记整理。
 

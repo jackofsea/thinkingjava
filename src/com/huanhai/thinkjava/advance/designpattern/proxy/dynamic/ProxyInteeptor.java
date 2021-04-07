@@ -25,7 +25,7 @@ public class ProxyInteeptor implements InvocationHandler {
         return null;
     }
 
-    public Object getInstance(){
-        return Proxy.newProxyInstance(ProxyInteeptor.class.getClassLoader(),new Class[]{People.class},new ProxyInteeptor(people));
+    public Object getInstance(Class<?>[] interfaces){
+        return Proxy.newProxyInstance(ProxyInteeptor.class.getClassLoader(),interfaces,new ProxyInteeptor(people));
     }
 }
