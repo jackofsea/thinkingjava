@@ -2,6 +2,7 @@ package com.huanhai.thinkjava.advance.designpattern.proxy.dynamic;
 
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -32,8 +33,11 @@ public class Boot {
         ProxyInteeptor p=new ProxyInteeptor(chinese);
         Action a=new Persion();
         a.run();
-        a= (Action) p.getInstance();
-        a.run();
+//        a= (Action) p.getInstance();
+//        a.run();
+
+
+        System.out.println( Arrays.toString(People.class.getInterfaces()));
 //        classType.add(Class.forName(className.get(0)));
 //        classType.add(Class.forName(className.get(1)));
 //        new ProxyInteeptor((People) classType.get(0).getConstructors()[0].newInstance(null)).getInstance().sayHello();
