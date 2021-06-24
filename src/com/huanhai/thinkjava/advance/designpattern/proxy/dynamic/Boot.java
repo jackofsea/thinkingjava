@@ -30,14 +30,14 @@ public class Boot {
         PeopleInvocationHandler invocationHandler = new PeopleInvocationHandler(chinese);
         People proxy = (People) Proxy.newProxyInstance(chinese.getClass().getClassLoader(), chinese.getClass().getInterfaces(), invocationHandler);
         proxy.sayHello();
-        ProxyInteeptor p=new ProxyInteeptor(chinese);
-        Action a=new Persion();
-        a.run();
+        proxy.say();
+//        ProxyInteeptor p=new ProxyInteeptor(chinese);
+//        Action a=new Persion();
+//        a.run();
 //        a= (Action) p.getInstance();
 //        a.run();
 
 
-        System.out.println( Arrays.toString(People.class.getInterfaces()));
 //        classType.add(Class.forName(className.get(0)));
 //        classType.add(Class.forName(className.get(1)));
 //        new ProxyInteeptor((People) classType.get(0).getConstructors()[0].newInstance(null)).getInstance().sayHello();
