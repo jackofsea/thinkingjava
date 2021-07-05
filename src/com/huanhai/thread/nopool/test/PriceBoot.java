@@ -145,7 +145,7 @@ public class PriceBoot {
     /**
      * 示例四
      *  Thread.sleep()在循环调用时，会让共享变量对其他线程可见
-     *  可能是阻止了JIT的编译游湖，具体原因待定
+     *  可能是阻止了JIT的编译游湖，产生方法调用让JVM不能过度优化
      * @throws InterruptedException
      */
     static  void testThreadHash() throws InterruptedException {

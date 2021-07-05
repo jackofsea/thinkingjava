@@ -23,8 +23,8 @@ public class Boot {
     public static void main(String[] args)  {
         className.add("com.huanhai.thinkjava.advance.designpattern.proxy.dynamic.Japan");
         className.add("com.huanhai.thinkjava.advance.designpattern.proxy.dynamic.Chinese");
-        // System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles","true");
-        // System.setProperty("sun.misc.ProxyGenerator.saveGeneratedFiles","true");
+        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles","true");
+        System.setProperty("sun.misc.ProxyGenerator.saveGeneratedFiles","true");
 
         People chinese = new Chinese();
         PeopleInvocationHandler invocationHandler = new PeopleInvocationHandler(chinese);
