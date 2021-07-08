@@ -5,7 +5,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class boot {
+public class boot  {
     private static ExecutorService pool;
 
     public static void main(String[] args) {
@@ -13,6 +13,7 @@ public class boot {
         pool = new ThreadPoolExecutor(3, 4, 30L, TimeUnit.SECONDS, new ArrayBlockingQueue<>(10));
         pool.submit(new TreadA(arg));
         pool.submit(new TreadB(arg));
+
 //        try {
 //           TimeUnit.SECONDS.sleep(10);
 //        } catch (InterruptedException e) {
@@ -20,6 +21,7 @@ public class boot {
 //        }
         pool.submit(new TreadB(arg));
         pool.submit(new TreadB(arg));
-//        pool.shutdown();
+        pool.shutdown();
+
     }
 }
