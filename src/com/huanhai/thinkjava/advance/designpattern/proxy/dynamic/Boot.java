@@ -1,5 +1,6 @@
 package com.huanhai.thinkjava.advance.designpattern.proxy.dynamic;
 
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,14 +25,15 @@ public class Boot {
         // System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles","true");
         System.setProperty("sun.misc.ProxyGenerator.saveGeneratedFiles","true");
 
-//        People chinese = new Chinese();
-//        PeopleInvocationHandler invocationHandler = new PeopleInvocationHandler(chinese);
-//        People proxy = (People) Proxy.newProxyInstance(chinese.getClass().getClassLoader(), chinese.getClass().getInterfaces(), invocationHandler);
-//        proxy.sayHello();
-        ProxyInteeptor p=new ProxyInteeptor(new Japan());
-        People peo=(People) p.getInstance(new Class[]{People.class});
-        peo.say();
-        peo.sayHello();
+        People chinese = new Chinese();
+        PeopleInvocationHandler invocationHandler = new PeopleInvocationHandler(chinese);
+        People proxy = (People) Proxy.newProxyInstance(chinese.getClass().getClassLoader(), chinese.getClass().getInterfaces(), invocationHandler);
+        proxy.sayHello();
+        ProxyInteeptor p=new ProxyInteeptor(chinese);
+        Action a=new Persion();
+        a.run();
+        a= (Action) p.getInstance();
+        a.run();
 //        classType.add(Class.forName(className.get(0)));
 //        classType.add(Class.forName(className.get(1)));
 //        new ProxyInteeptor((People) classType.get(0).getConstructors()[0].newInstance(null)).getInstance().sayHello();

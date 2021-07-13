@@ -21,8 +21,8 @@ public class ProxyInteeptor implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println("23321------------");
-        method.invoke(people,args);
-        return null;
+
+        return  method.invoke(people,args);
     }
 
     public Object getInstance(Class<?>[] interfaces){

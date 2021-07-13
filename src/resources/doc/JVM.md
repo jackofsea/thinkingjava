@@ -102,13 +102,40 @@ java虚拟机规范：当请求栈深度大于虚拟机所以允许的栈深度�
 
 ​    JDK1.2以后将引用分为四类：强引用、软引用、弱引用和虚引用，这4种引用强度依次减弱。
 
-​       强引用：代码中普遍存在，如“Object a=new Object()”此类的代码，只要引用存在那么JVM是不会回收此对象的。
+​       **强引用：**代码中普遍存在，如“Object a=new Object()”此类的代码，只要引用存在那么JVM是不会回收此对象的。
 
-​      软引用：描述一些有用但非必需对象，当JVM内存发生内存溢出异常前的时候，垃圾回收器会回收软引用对象的内存，如果回收后的内存不足以分配空间，那么会抛出OOM异常。软引用由SoftReference实现。
+​      **软引用：**描述一些有用但非必需对象，当JVM内存发生内存溢出异常前的时候，垃圾回收器会回收软引用对象的内存，如果回收后的内存不足以分配空间，那么会抛出OOM异常。软引用由SoftReference实现。
 
-​     弱引用：描述一下非必需的对象，被弱引用关联的对象只能生存到下一次垃圾收集发生之前。当垃圾收集器工作时，无论内存是否足够，都会回收弱引用关联的对象。弱引用由WeakReference实现。
+```java
+Object obj = new Object();
+SoftReference<Object> sf = new SoftReference<Object>(obj);
+obj = null;
+sf.get();//有时候会返回null
+```
 
-​    虚引用：也称幽灵引用或幻影引用，它是最弱的一种引用关系。一个对象是否有虚引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用取得一个对象的实例。唯一目的就是能在这个对象被回收时收到一个系统通知。需引用由PhantomReference类实现。
+​     **弱引用**：描述一下非必需的对象，被弱引用关联的对象只能生存到下一次垃圾收集发生之前。当垃圾收集器工作时，无论内存是否足够，都会回收弱引用关联的对象。
+
+```java
+Object obj = new Object();
+WeakReference<Object> wf = new WeakReference<Object>(obj);
+obj = null;
+wf.get();//有时候会返回null
+wf.isEnQueued();//返回是否被垃圾回收器标记为即将回收的垃圾
+```
+
+弱引用由WeakReference实现。
+
+​    **虚引用：**也称幽灵引用或幻影引用，它是最弱的一种引用关系。一个对象是否有虚引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用取得一个对象的实例。唯一目的就是能在这个对象被回收时收到一个系统通知。需引用由PhantomReference类实现。
+
+```java
+Object obj = new Object();
+PhantomReference<Object> pf = new PhantomReference<Object>(obj);
+obj=null;
+pf.get();//永远返回null
+pf.isEnQueued();//返回是否从内存中已经删除
+```
+
+ 虚引用主要用于检测对象是否已经从内存中删除。
 
 ### 3.2.垃圾收集算法
 
